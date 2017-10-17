@@ -145,23 +145,6 @@ export default {
 
         // fetch the list of available modules from the api
         fetchModuleProfiles: function() {
-            // var xhr = new XMLHttpRequest()
-            // var self = this
-            // xhr.open('GET', apiMockModuleProfiles)
-            // xhr.onload = function() {
-            //     var profiles = JSON.parse(xhr.responseText)
-            //     // sort module profiles by category
-            //     var byCat = {}
-            //     for (var i = 0; i < profiles.length; i++) {
-            //         var profile = profiles[i]
-            //         if (!byCat[profile.category]) {
-            //             byCat[profile.category] = Array()
-            //         }
-            //         byCat[profile.category].push(profile)
-            //     }
-            //     self.availableModuleProfiles = byCat
-            // }
-            // xhr.send()
             const profiles = mockModuleProfiles
             var byCat = {}
             for (var i = 0; i < profiles.length; i++) {
@@ -175,14 +158,6 @@ export default {
         },
 
         fetchExampleWorkflow: function() {
-            // var xhr = new XMLHttpRequest()
-            // var self = this
-            // xhr.open('GET', apiMockWorkflow)
-            // xhr.onload = function() {
-            //     const moduleDefinitions = JSON.parse(xhr.responseText)
-            //     self.addModuleDefinitionsToWorkflow(moduleDefinitions)
-            // }
-            // xhr.send()
             const moduleDefinitions = mockWorkflow
             this.addModuleDefinitionsToWorkflow(moduleDefinitions)
         },

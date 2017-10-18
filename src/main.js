@@ -20,6 +20,7 @@ Vue.component('module-properties-editor', ModulePropertiesEditor)
 const Jobs = { template: '<div><h2>Jobs</h2></div>' }
 
 const routes = [
+    { path: '/', redirect: '/workflow' },
     { path: '/workflow', component: Workflow },
     { path: '/jobs',     component: Jobs }
 ]

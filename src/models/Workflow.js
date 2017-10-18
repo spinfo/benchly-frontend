@@ -189,7 +189,7 @@ function Workflow() {
         if(allAreContained) {
             return rows
         } else {
-            console.log("Found closed cycle wothout root.")
+            console.log("Found closed cycle without root.")
             return []
         }
     },
@@ -247,21 +247,6 @@ function Workflow() {
             return this._getChildRows(accu, included)
         }
         return accu
-    }
-
-    // TODO: Delete this little helper for debugging
-    this.report = function () {
-        const self = this
-        console.log("----------")
-        this.modules.forEach(function (m) {
-            console.log("> " + m.getName())
-
-            m.getConnectedInputIds().forEach(function (targetId) {
-                const conn = self._byInputIds[targetId]
-                console.log("---> " + conn.getName())
-            })
-        })
-        console.log("----------")
     }
 }
 

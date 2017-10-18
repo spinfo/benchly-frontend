@@ -51,8 +51,6 @@ function Module() {
     // initialize one of the serializable input/output port "lists" (actually hashes/objects)
     // return: [Port]
     this._portListInit = function(objects) {
-        // This probably gets called a lot (too often?), so log it
-        // console.log("called portListInit()")
         var ports = []
         for (var portName in objects) {
             // set the port to be a Port and collect
@@ -168,6 +166,18 @@ function Module() {
         return null
     }
 
+    this.getClassName = function() {
+        return this._definition.moduleCanonicalClassName
+    }
+
+    this.getProperties = function() {
+        return this._definition.properties
+    }
+
+    this.setProperties = function(properties) {
+        return this._definition.properties = properties
+    }
+
     this._initMetadataIfMissing = function() {
         if (this._definition.metadata == null) {
             this._definition.metadata = {}
@@ -188,13 +198,10 @@ Module.fromProfile = function(profile) {
     var module = new Module
     var def = module._definition
 
-    for (var key in profile.propertyDescriptions) {
-        def.properties[key] = ""
-    }
-    def.properties.name = profile.name
+    def.properties = BlyUtil.shallowCopy(profile.propertyDefaultValues)
 
     def.moduleInstanceHashCode = BlyUtil.generateId()
-    def.canonicalClassName = profile.canonicalClassName
+    def.moduleCanonicalClassName = profile.canonicalClassName
 
     var putPortsIntoNamedHash = function(portProfiles) {
         const hash = {}

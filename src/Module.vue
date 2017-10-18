@@ -1,21 +1,40 @@
 <template>
-    <div :id="id" class="bly-module" :style="style">
-        <button class="bly-module-close-btn" style="float: right;" v-on:click="removeModule()">
-            ❌
-        </button>
-        <div>{{ name }}</div>
-        <div style="margin-top: 10px">
-            <div style="float: left;" class="bly-input-ports">
-                <div v-for="port in inputPorts" class="bly-port" :id="port.instanceHashCode">
-                    {{ port.name }}
+    <div>
+        <div :id="id" class="bly-module" :style="style">
+            <button class="bly-module-btn" v-on:click="removeModule()">
+                ❌
+            </button>
+            <button class="bly-module-btn" v-on:click="openPropertiesEditor()">
+                <b>&nbsp;i&nbsp;</b>
+            </button>
+
+            <div>{{ name }}</div>
+
+            <div style="margin-top: 10px">
+                <div style="float: left;" class="bly-input-ports">
+                    <div v-for="port in inputPorts" class="bly-port" :id="port.instanceHashCode">
+                        {{ port.name }}
+                    </div>
                 </div>
-            </div>
-            <div style="float: left; margin-left: 10px" class="bly-output-ports">
-                <div v-for="port in outputPorts" class="bly-port bly-output-port" :id="port.instanceHashCode">
-                    {{ port.name }}
+                <div style="float: left; margin-left: 10px" class="bly-output-ports">
+                    <div v-for="port in outputPorts" class="bly-port bly-output-port" :id="port.instanceHashCode">
+                        {{ port.name }}
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Each modal needs to be at the same level as it's module to not be overlayed by other modules -->
+        <modal :name="propertiesEditorName"
+            height="auto"
+            width="50%"
+            :resizable="true"
+            :pivot-y="0.1"
+            :scrollable="true">
+            <module-properties-editor
+                :initial-state="moduleProperties"
+                :property-descriptions="propertyDescriptions"
+                v-on:module-properties-saved="saveProperties" />
+        </modal>
     </div>
 </template>
 
@@ -23,14 +42,17 @@
 // a module drawn on the canvas and configurable by the user
 export default {
     props: {
-        module: Object
+        module: Object,
+        // these will be passed right through to the properties editor
+        propertyDescriptions: Object
     },
     data: function() {
         return {
             id: this.module.getId(),
             name: this.module.getName(),
             inputPorts: this.module.getInputPorts(),
-            outputPorts: this.module.getOutputPorts()
+            outputPorts: this.module.getOutputPorts(),
+            propertiesEditorName: 'propsEditor' + String(this.module.getId())
         }
     },
     computed: {
@@ -41,6 +63,12 @@ export default {
                 top: pos.y + "px"
             }
         },
+        moduleProperties: function() {
+            if (this.module) {
+                return this.module.getProperties()
+            }
+            return {}
+        }
     },
     mounted: function () {
         // tell jsplumb to initialize this element as a draggable
@@ -59,6 +87,13 @@ export default {
     methods: {
         removeModule: function() {
             this.$emit('moduleremoved', this.module)
+        },
+        openPropertiesEditor() {
+            this.$modal.show(this.propertiesEditorName)
+        },
+        saveProperties(newProperties) {
+            this.module.setProperties(newProperties)
+            this.$modal.hide(this.propertiesEditorName)
         }
     }
 }
@@ -81,14 +116,16 @@ export default {
     transition: background-color 0.25s ease-in;
 }
 
-.bly-module-close-btn {
+.bly-module-btn {
+    float: right;
     padding: 2px;
+    margin: 2px;
     cursor: pointer;
     background-color: white;
     color: #aeaeae;
     border: 1px solid #aeaeae;
 }
-.bly-module-close-btn:hover {
+.bly-module-btn:hover {
     background-color: #a1a1a1;
     color: black;
     border: 1px solid black;

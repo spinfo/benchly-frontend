@@ -8,6 +8,10 @@ export default [
             "Biggest child uses parent symbol": "Has the biggest child of each node use that node's symbol (to visualize the flow of each path most used).",
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "Biggest child uses parent symbol": "true",
+            "name": "ASCIIGraph"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -36,6 +40,10 @@ export default [
             "name": "The module instance's name",
             "Length of the randomly composed DNA sequence": "Length of the randomly composed DNA sequence"
         },
+        "propertyDefaultValues": {
+            "name": "Artificial Sequence Generator",
+            "Length of the randomly composed DNA sequence": "1024"
+        },
         "inputPorts": [ ],
         "outputPorts": [
             {
@@ -56,6 +64,11 @@ export default [
             "name": "The module instance's name",
             "Maximum length of branches": "Define the maximum length of any branch of the trie. Set to -1 for no constraint",
             "Reverse the trie": "Reverse the building of the trie (results in a prefix trie)."
+        },
+        "propertyDefaultValues": {
+            "name": "AtomicRangeSuffixTrieBuilder",
+            "Maximum length of branches": "10",
+            "Reverse the trie": "false"
         },
         "inputPorts": [
             {
@@ -83,6 +96,9 @@ export default [
         "category": "bag of words",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "BagsOfWords"
         },
         "inputPorts": [
             {
@@ -127,6 +143,11 @@ export default [
             "Filter on TF-IDF min": "When computing distances disregards words with tf-idf below this value. Disabled on \"0.0\"",
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "Normalize distance": "false",
+            "Filter on TF-IDF min": "0.8",
+            "name": "BagsOfWordsDistancesModule"
+        },
         "inputPorts": [
             {
                 "name": "json",
@@ -158,6 +179,13 @@ export default [
             "empty value": "String to insert as empty value into the output (only applicable to CSV output).",
             "output format": "Desired output format [csv|json]."
         },
+        "propertyDefaultValues": {
+            "output delimiter": ";",
+            "name": "BoW Type Matrix",
+            "apply TF-iDF": "false",
+            "empty value": "0",
+            "output format": "csv"
+        },
         "inputPorts": [
             {
                 "name": "BoW",
@@ -185,6 +213,10 @@ export default [
         "propertyDescriptions": {
             "Minimal branch length allowed": "Minimal branch length for edges between nodes needed.</br>This determines the stop during the search(es).",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "Minimal branch length allowed": "2",
+            "name": "Branch Length Grouping"
         },
         "inputPorts": [
             {
@@ -220,6 +252,9 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "name": "Buffer Module"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -251,6 +286,13 @@ export default [
             "name": "The module instance's name",
             "reverse transform": "Conduct reverse Burrows-Wheeler Transformation [true|false]."
         },
+        "propertyDefaultValues": {
+            "output delimiter": "\\n",
+            "input delimiter regex": "\\R+",
+            "string end char": "$",
+            "name": "Burrows-Wheeler Transform",
+            "reverse transform": "false"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -280,6 +322,11 @@ export default [
             "CSV input delimiter": "Regular expression to use as field delimiter for CSV input",
             "Edge designator": "Designator for edges in the GEXF graph (use to describe type of relationship between connected nodes)"
         },
+        "propertyDefaultValues": {
+            "name": "CSV to GEXF converter",
+            "CSV input delimiter": ";",
+            "Edge designator": "resembles"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -308,6 +355,11 @@ export default [
             "Locale": "Tag of the locale to use for the case change. Accepts a IETF BCP 47 language tag string (can be as simple as 'en-US' or 'de-DE'; for details, see https://tools.ietf.org/html/bcp47).",
             "Change to": "Case to change the input to. Accepted values are 'lower[case]' or 'upper[case]'.",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "Locale": "en-US",
+            "Change to": "lowercase",
+            "name": "Case Changer"
         },
         "inputPorts": [
             {
@@ -343,6 +395,16 @@ export default [
             "Output file": "Specifies the location of the output file (PNG or JPEG).",
             "Markierungsart fuer Ungleichverteilung": "Legt fest, wie die Ungleichverteilung markiert wird (alpha|rot|alpha+rot|keine)."
         },
+        "propertyDefaultValues": {
+            "Image width": "640",
+            "Image height": "480",
+            "name": "ColourGraph",
+            "Pixel per tree level": "10",
+            "Schwellwert fuer Gleichverteilung": "1.0",
+            "Ungleichverteilungen im Baum markieren": "false",
+            "Output file": "/home/david/exp_20171018-001_colourgraph.png",
+            "Markierungsart fuer Ungleichverteilung": "alpha"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -362,6 +424,10 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name",
             "Separator": "A separator to split input on. Defaults to newlines."
+        },
+        "propertyDefaultValues": {
+            "name": "Comparison Module",
+            "Separator": "\r\n|\n|\r"
         },
         "inputPorts": [
             {
@@ -413,6 +479,11 @@ export default [
             "name": "The module instance's name",
             "Encoding": "The text encoding of the input (if applicable, else set to empty string)"
         },
+        "propertyDefaultValues": {
+            "Buffer length": "8192",
+            "name": "Console Reader",
+            "Encoding": "UTF-8"
+        },
         "inputPorts": [ ],
         "outputPorts": [
             {
@@ -431,6 +502,9 @@ export default [
         "category": "input output",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "Console Writer"
         },
         "inputPorts": [
             {
@@ -454,6 +528,12 @@ export default [
             "name": "The module instance's name",
             "input delimiter": "Input matrix' delimiter",
             "distance type": "Two possible distance types: \"ED\" (Euclidean distance), \"CD\" (Cosine Distance) \"CS\" (Cosine similarity)"
+        },
+        "propertyDefaultValues": {
+            "output delimiter": ";",
+            "name": "Distance Matrix",
+            "input delimiter": ";",
+            "distance type": "ED"
         },
         "inputPorts": [
             {
@@ -481,6 +561,9 @@ export default [
         "category": "format conversion",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "Dot2GST converter"
         },
         "inputPorts": [
             {
@@ -519,6 +602,12 @@ export default [
             "name": "The module instance's name",
             "zero value": "String to insert as zero value into the output, replacing an eliminated row/column-value."
         },
+        "propertyDefaultValues": {
+            "output delimiter": ";",
+            "input delimiter regex": "[\\,;]",
+            "name": "Eliminate Opposing Matrix Values",
+            "zero value": ""
+        },
         "inputPorts": [
             {
                 "name": "column sums",
@@ -553,6 +642,9 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "name": "Example Gson Deserialization Module"
+        },
         "inputPorts": [
             {
                 "name": "JSON",
@@ -579,6 +671,9 @@ export default [
         "category": "examples",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "Example Gson Serialization Module"
         },
         "inputPorts": [
             {
@@ -609,6 +704,12 @@ export default [
             "name": "The module instance's name",
             "delimiter A": "Regular expression to use as segmentation delimiter for input A",
             "delimiter B": "Regular expression to use as segmentation delimiter for input B"
+        },
+        "propertyDefaultValues": {
+            "delimiter out": "\t",
+            "name": "Example Module",
+            "delimiter A": "[\\s]+",
+            "delimiter B": "[\\s]+"
         },
         "inputPorts": [
             {
@@ -653,6 +754,11 @@ export default [
             "name": "The module instance's name",
             "CSV delimiter": "String to use as CSV field delimiter."
         },
+        "propertyDefaultValues": {
+            "calculate probabilities": "true",
+            "name": "ExtensibleTreeNode to CSV converter",
+            "CSV delimiter": ";"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -679,6 +785,9 @@ export default [
         "category": "format conversion",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "ExtensibleTreeNode to GEXF converter"
         },
         "inputPorts": [
             {
@@ -708,6 +817,11 @@ export default [
             "name": "The module instance's name",
             "directory": "Working directory to execute the command in. Please specify the complete path. On MS Windows, use '\\\\' as path separator.",
             "command": "Command to execute. Please specify the complete path.<br/>Explicit parameters can be separated by using ',' (comma) as a delimiter (use '\\,' if you want a literal comma). Most of the times with linux/unix it is best to wrap the command in a shell, in this case meaning that you prefix your command with '/bin/sh,-c,'. On MS Windows, please use '\\\\' as path separator."
+        },
+        "propertyDefaultValues": {
+            "name": "External Command Module",
+            "directory": "/tmp",
+            "command": "/bin/sh,-c,(echo '>Seq 1'; cat -)"
         },
         "inputPorts": [
             {
@@ -747,6 +861,11 @@ export default [
             "path to search": "The path(s) to search for text files (directories are searched recursively). Multiple paths must be separated by semicolons (;).",
             "file name suffix": "File name suffix to search for (e.g. 'txt')."
         },
+        "propertyDefaultValues": {
+            "name": "File Finder",
+            "path to search": "/home/david",
+            "file name suffix": "txt"
+        },
         "inputPorts": [ ],
         "outputPorts": [
             {
@@ -770,6 +889,14 @@ export default [
             "name": "The module instance's name",
             "Encoding": "The text encoding of the input file (if applicable, else set to empty string)",
             "Use GZIP": "Set to 'true' if the input file is compressed using GZIP"
+        },
+        "propertyDefaultValues": {
+            "inputfile": "/home/david/input.txt",
+            "Normalize Unicode": "true",
+            "Buffer length": "8192",
+            "name": "File Reader",
+            "Encoding": "UTF-8",
+            "Use GZIP": "false"
         },
         "inputPorts": [ ],
         "outputPorts": [
@@ -795,6 +922,13 @@ export default [
             "Encoding": "The text encoding of the output file (if input is a char pipe)",
             "Use GZIP": "Set to 'true' if the output file is to be compressed using GZIP"
         },
+        "propertyDefaultValues": {
+            "Buffer length": "8192",
+            "outputfile": "/home/david/output.txt",
+            "name": "File Writer",
+            "Encoding": "UTF-8",
+            "Use GZIP": "false"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -816,6 +950,11 @@ export default [
             "minlength": "minimum length of ...",
             "maxlength": "maximum length of ...",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "minlength": "1",
+            "maxlength": "30",
+            "name": "Filter Module"
         },
         "inputPorts": [
             {
@@ -846,6 +985,11 @@ export default [
             "Amount of letters 'C' and 'G'": "Amount of letters 'C' and 'G'",
             "Length of the randomly composed DNA sequence": "Length of the randomly composed DNA sequence"
         },
+        "propertyDefaultValues": {
+            "name": "GC adjusted Sequence Generator",
+            "Amount of letters 'C' and 'G'": "0.5",
+            "Length of the randomly composed DNA sequence": "1024"
+        },
         "inputPorts": [ ],
         "outputPorts": [
             {
@@ -866,6 +1010,11 @@ export default [
             "minimum similarity": "Minimum similarity value an edge must have to be kept in the graph.",
             "name": "The module instance's name",
             "minimum amount of tokens": "Minimum amount of tokens a type must have to be kept in the graph."
+        },
+        "propertyDefaultValues": {
+            "minimum similarity": "0.1",
+            "name": "GEXF Filter",
+            "minimum amount of tokens": "2"
         },
         "inputPorts": [
             {
@@ -893,6 +1042,9 @@ export default [
         "category": "tree building",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "GeneralisedSuffixTreeModule"
         },
         "inputPorts": [
             {
@@ -970,6 +1122,9 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "name": "GeneralisedSuffixTreesMorphologyModule"
+        },
         "inputPorts": [
             {
                 "name": "plain",
@@ -1007,6 +1162,12 @@ export default [
             "window size": "Size of the sliding window (default: 5)",
             "field separator": "Separator for the CSV fields"
         },
+        "propertyDefaultValues": {
+            "cooccurrency separator": ",",
+            "name": "HAL advanced module",
+            "window size": "5",
+            "field separator": "\t\t"
+        },
         "inputPorts": [
             {
                 "name": "text input",
@@ -1033,6 +1194,9 @@ export default [
         "category": "input output",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "Join Module"
         },
         "inputPorts": [
             {
@@ -1067,6 +1231,9 @@ export default [
         "category": "kwip",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "KWIP Module"
         },
         "inputPorts": [
             {
@@ -1126,6 +1293,10 @@ export default [
             "omit zero values": "Omit zero values in output [true/false]",
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "omit zero values": "false",
+            "name": "Kwip BoW Matrix"
+        },
         "inputPorts": [
             {
                 "name": "kwip-units",
@@ -1170,6 +1341,12 @@ export default [
             "Pair list cutoff value": "At or below which value reading of the pair list should stop.",
             "csv delimiter": "Delimiter of the input csv cells."
         },
+        "propertyDefaultValues": {
+            "name": "LFGroup Building Module",
+            "output empty lexical groups": "false",
+            "Pair list cutoff value": "5",
+            "csv delimiter": ";"
+        },
         "inputPorts": [
             {
                 "name": "List of Pairs",
@@ -1204,6 +1381,10 @@ export default [
         "propertyDescriptions": {
             "Blank Trimming": "Blanks can be ignored in direction of reading (\"FOLLOWING\", default) or generally (\"ALL\") or not at all (\"NONE\").",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "Blank Trimming": "FOLLOWING",
+            "name": "LabelDataMergeModule"
         },
         "inputPorts": [
             {
@@ -1243,6 +1424,13 @@ export default [
             "iterations": "How often to iterate the inflation and deflation steps.",
             "csv delimiter": "Delimiter of the input csv cells."
         },
+        "propertyDefaultValues": {
+            "r": "2.0",
+            "name": "Markov Clustering Module",
+            "l": "2",
+            "iterations": "1000",
+            "csv delimiter": ";"
+        },
         "inputPorts": [
             {
                 "name": "input matrix",
@@ -1274,6 +1462,14 @@ export default [
             "Reflexive": "Whether the operation should be applied to a row/col with itself.",
             "operation": "Which operation to perform, one of: AND, OR, XOR.",
             "Operate on rows": "Whether to operate on rows (true) or columns (false)."
+        },
+        "propertyDefaultValues": {
+            "Output separator": ";",
+            "Input separator": ";",
+            "name": "Matrix Bitwise Operation Module",
+            "Reflexive": "false",
+            "operation": "AND",
+            "Operate on rows": "true"
         },
         "inputPorts": [
             {
@@ -1319,6 +1515,12 @@ export default [
             "input has header line": "First line of input is header line [true/false].",
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "output delimiter": ";",
+            "input delimiter regex": "[\\,;]",
+            "input has header line": "false",
+            "name": "Matrix Column Sum"
+        },
         "inputPorts": [
             {
                 "name": "csv input",
@@ -1347,6 +1549,11 @@ export default [
             "csv field delimiter": "CSV field delimiter [string].",
             "name": "The module instance's name",
             "match regex": "Regex that describes a positive match."
+        },
+        "propertyDefaultValues": {
+            "csv field delimiter": ";",
+            "name": "Matrix Filter",
+            "match regex": "[^0]+"
         },
         "inputPorts": [
             {
@@ -1379,6 +1586,13 @@ export default [
             "output delimiter (inner)": "String to insert as segmentation delimiter between row- and column-values (escaped values will be unescaped).",
             "match regex": "Regex that describes a positive match."
         },
+        "propertyDefaultValues": {
+            "input delimiter regex": "[\\,;]",
+            "output delimiter (outer)": "\\n",
+            "name": "Matrix Row/Col Pair Extractor",
+            "output delimiter (inner)": "|",
+            "match regex": "[^0]+"
+        },
         "inputPorts": [
             {
                 "name": "csv input",
@@ -1407,6 +1621,11 @@ export default [
             "expression": "An expression to evaluate on each matrix cell. Use 'VAL' to refer to the cell value. Expression has to result in a result of class Double.",
             "name": "The module instance's name",
             "csv delimiter": "The csv delimiter used in input and output."
+        },
+        "propertyDefaultValues": {
+            "expression": "(VAL != 0 ? 1.0 : 0.0)",
+            "name": "MatrixValuesExpressionApplyModule",
+            "csv delimiter": ";"
         },
         "inputPorts": [
             {
@@ -1440,6 +1659,14 @@ export default [
             "input delimiter": "Delimiter of input csv",
             "output format": "Desired output format [csv|json]."
         },
+        "propertyDefaultValues": {
+            "output delimiter": ";",
+            "exclude zeros": "true",
+            "reverse order": "false",
+            "name": "MatrixVectorSortModule",
+            "input delimiter": ";",
+            "output format": "csv"
+        },
         "inputPorts": [
             {
                 "name": "Type Matrix",
@@ -1472,6 +1699,14 @@ export default [
             "ouput format": "Format of output [json|csv].",
             "csv input delimiter regex": "Regular expression to use as segmentation delimiter for CSV input."
         },
+        "propertyDefaultValues": {
+            "csv output delimiter": ";",
+            "csv empty value": "0",
+            "input format": "csv",
+            "name": "Minkowski Distance Matrix",
+            "ouput format": "csv",
+            "csv input delimiter regex": "[\\,;]"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -1498,6 +1733,9 @@ export default [
         "category": "morphology",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "Morphology Check Module"
         },
         "inputPorts": [
             {
@@ -1536,6 +1774,12 @@ export default [
             "name": "The module instance's name",
             "Minim length for delta": "Minimal length for identical string delta allowed."
         },
+        "propertyDefaultValues": {
+            "Maximum number of trials": "16",
+            "Minimum length for alpha": "3",
+            "name": "Motif Detection",
+            "Minim length for delta": "2"
+        },
         "inputPorts": [
             {
                 "name": "dot input",
@@ -1572,6 +1816,11 @@ export default [
             "name": "The module instance's name",
             "Delimiter character": "ASCII character used to delimit each column."
         },
+        "propertyDefaultValues": {
+            "Delimiter used for the output": ";",
+            "name": "Named Field Matrix Hamming distance",
+            "Delimiter character": ","
+        },
         "inputPorts": [
             {
                 "name": "Input",
@@ -1606,6 +1855,17 @@ export default [
             "wandleInKleinbuchstaben": "If set to 'true' the output will be all lowercase",
             "behaltePunktuation": "If set to 'true' punctuation will not be discarded",
             "word divider": "symbol or string to divide words from each other"
+        },
+        "propertyDefaultValues": {
+            "oneJSONObjectPerLine": "true",
+            "outputAnnotatedJson": "true",
+            "output JSON": "true",
+            "name": "OANC-Parser",
+            "fuegeStartSymbolHinzu": "true",
+            "fuegeTerminierSymbolHinzu": "true",
+            "wandleInKleinbuchstaben": "true",
+            "behaltePunktuation": "true",
+            "word divider": " "
         },
         "inputPorts": [
             {
@@ -1642,6 +1902,17 @@ export default [
             "Input document divider": "Divider that marks the input documents (leave empty if input does not divide into separate documents).",
             "Include scoring value in output": "Include scoring values in output."
         },
+        "propertyDefaultValues": {
+            "Scoring decrease factor": "1",
+            "Output document divider": "\\n",
+            "name": "Paradigm Segmenter",
+            "Buffer size": "10",
+            "Minimal cost": "1",
+            "Input token divider": "",
+            "Input document divider": "\\n",
+            "Output token divider": "\\t",
+            "Include scoring value in output": "false"
+        },
         "inputPorts": [
             {
                 "name": "text",
@@ -1676,6 +1947,9 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "name": "PlainText2TreeBuilder"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -1703,6 +1977,10 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name",
             "Number of splits": "Insert an integer"
+        },
+        "propertyDefaultValues": {
+            "name": "Random Sequence Splitting",
+            "Number of splits": "100"
         },
         "inputPorts": [
             {
@@ -1732,6 +2010,10 @@ export default [
             "Length of the random String": "Length of the randomly composed String",
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "Length of the random String": "5",
+            "name": "Random String Example Module"
+        },
         "inputPorts": [ ],
         "outputPorts": [
             {
@@ -1751,6 +2033,10 @@ export default [
         "propertyDescriptions": {
             "regex": "Regular expression to search for",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "regex": "[aeiu]",
+            "name": "RegEx Line Filter Module"
         },
         "inputPorts": [
             {
@@ -1789,6 +2075,12 @@ export default [
             "unescape": "Perform unescape operation on the replacement string before using it [true|false]",
             "replacement": "Replacement for found strings"
         },
+        "propertyDefaultValues": {
+            "regex": "[aeiu]",
+            "name": "RegEx Replacement Module",
+            "unescape": "true",
+            "replacement": "o"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -1816,6 +2108,10 @@ export default [
         "propertyDescriptions": {
             "Reverse each line": "Reverse line by line instead of reverting the whole input.",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "Reverse each line": "false",
+            "name": "Reverser Module"
         },
         "inputPorts": [
             {
@@ -1851,6 +2147,14 @@ export default [
             "SMB password": "SMB password",
             "Use GZIP": "Set to 'true' if the input file is compressed using GZIP"
         },
+        "propertyDefaultValues": {
+            "SMB domain": "WORKGROUP",
+            "Buffer length": "8192",
+            "SMB URL to inputfile": "smb://sofs2.uni-koeln.de/StringsAndStructures/input.txt",
+            "name": "SMB File Reader",
+            "Encoding": "UTF-8",
+            "Use GZIP": "false"
+        },
         "inputPorts": [ ],
         "outputPorts": [
             {
@@ -1878,6 +2182,14 @@ export default [
             "SMB password": "SMB password",
             "Use GZIP": "Set to 'true' if the output file is to be compressed using GZIP"
         },
+        "propertyDefaultValues": {
+            "SMB domain": "WORKGROUP",
+            "Buffer length": "8192",
+            "name": "SMB File Writer",
+            "SMB URL to outputfile": "smb://sofs2.uni-koeln.de/StringsAndStructures/input.txt",
+            "Encoding": "UTF-8",
+            "Use GZIP": "false"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -1897,6 +2209,9 @@ export default [
         "category": "segmentation",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "Segment Combiner Module"
         },
         "inputPorts": [
             {
@@ -1926,6 +2241,11 @@ export default [
             "segment input delimiter regex": "Regular expression to use as segmentation delimiter for the segments of the string.",
             "name": "The module instance's name",
             "CSV output delimiter (!= ',')": "String to use as segmentation delimiter between CSV elements."
+        },
+        "propertyDefaultValues": {
+            "segment input delimiter regex": "\\|",
+            "name": "Segment Distance Matrix",
+            "CSV output delimiter (!= ',')": ";"
         },
         "inputPorts": [
             {
@@ -1968,6 +2288,16 @@ export default [
             "string output delimiter": "String to insert as segmentation delimiter between strings (does understand escaped sequences and unescapes them).",
             "reverse segmenting": "Reverse the segmentation: Join where segments are split and the other way around [true or false]."
         },
+        "propertyDefaultValues": {
+            "string input delimiter regex": "\\n",
+            "segment input delimiter regex": "\\|",
+            "segment output delimiter": "|",
+            "group output delimiter": "\\n",
+            "name": "Segment Joiner",
+            "output original string": "true",
+            "string output delimiter": ";",
+            "reverse segmenting": "false"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2000,6 +2330,14 @@ export default [
             "omit empty rows and cols": "Omit any row or column that has only zero values on output [true|false].",
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "string input delimiter regex": "\\n",
+            "CSV output delimiter": ";",
+            "segment input delimiter regex": "\\|",
+            "omit zero values": "true",
+            "omit empty rows and cols": "true",
+            "name": "Segment Matrix"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2029,6 +2367,12 @@ export default [
             "delimiter between candidate's segments": "Opposing split candidates contain segments split by this delimiter.",
             "matrix input csv delimiter": "Csv delimiter of the input matrix.",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "delimiter between candidate's": ";",
+            "delimiter between candidate's segments": "\\Q|\\E",
+            "matrix input csv delimiter": ";",
+            "name": "SegmentMatrixAnalyzeModule"
         },
         "inputPorts": [
             {
@@ -2066,6 +2410,11 @@ export default [
             "Segment separator": "On what single char to split the segments.",
             "Input language": "The input language to use. Either 'EN', 'DE' or 'ES'"
         },
+        "propertyDefaultValues": {
+            "name": "Segmentatation Check Module",
+            "Segment separator": "|",
+            "Input language": "EN"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2093,6 +2442,10 @@ export default [
         "propertyDescriptions": {
             "segment delimiter": "delimiter string segmenting the input (and output) words",
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "segment delimiter": "|",
+            "name": "Segmentation Apply Module"
         },
         "inputPorts": [
             {
@@ -2128,6 +2481,9 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "name": "Segments Transition Network Module"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2157,6 +2513,11 @@ export default [
             "name": "The module instance's name",
             "Newick branch length": "Choose branch length in Newick:</br>\"true\" = by string.</br>\"false\" = by node occurence"
         },
+        "propertyDefaultValues": {
+            "Path label": "^",
+            "name": "SeqQuery",
+            "Newick branch length": "true"
+        },
         "inputPorts": [
             {
                 "name": "JSON",
@@ -2184,6 +2545,10 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name",
             "Print out tree frequencies?": "\"true\": show tree frequencies</br>\"false\": do not show tree frequencies"
+        },
+        "propertyDefaultValues": {
+            "name": "Sequence Tree Properties",
+            "Print out tree frequencies?": "false"
         },
         "inputPorts": [
             {
@@ -2220,6 +2585,10 @@ export default [
             "name": "The module instance's name",
             "CSV delimiter": "String to use as CSV field delimiter."
         },
+        "propertyDefaultValues": {
+            "name": "Suffix Tree Vectors to CSV converter",
+            "CSV delimiter": ";"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2250,6 +2619,12 @@ export default [
             "Create individual branches": "Creates individual branches for each sentence.",
             "Input delimiter (outer)": "<p>The <i>outer input delimiter</i> is used to discern strings from each other that will be inserted into the resulting graph independently, resulting into a <i>Generalised Suffix Net</i>.</p><p>The value is interpreted as a <i>Regular Expression</i>, e.g. '$' marks the end of a line and '\\$' means the actual dollar sign; set to '\\z' for single string input.</p>"
         },
+        "propertyDefaultValues": {
+            "name": "SuffixNetBuilder",
+            "Input delimiter (inner)": "\\s+",
+            "Create individual branches": "false",
+            "Input delimiter (outer)": "\\R+"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2279,6 +2654,12 @@ export default [
             "name": "The module instance's name",
             "vector type": "The feature type of the vector. Possible inputs: \"TF-IDF\", \"TF-DF\", \"binary\"",
             "corpus/text name": "Insert corpus/text name"
+        },
+        "propertyDefaultValues": {
+            "clustering type": "KM",
+            "name": "SuffixTreeClusteringWrapper",
+            "vector type": "TF-IDF",
+            "corpus/text name": "myCorpus"
         },
         "inputPorts": [
             {
@@ -2316,6 +2697,12 @@ export default [
             "matrix input csv delimiter": "The delimiter to use when reading matrix csv input.",
             "name": "The module instance's name",
             "corpus/text name": "Insert corpus/text name"
+        },
+        "propertyDefaultValues": {
+            "clustering type": "KM",
+            "matrix input csv delimiter": ";",
+            "name": "SuffixTreeClusteringWrapperV2",
+            "corpus/text name": "myCorpus"
         },
         "inputPorts": [
             {
@@ -2360,6 +2747,10 @@ export default [
             "vector type": "The feature type of the vector. Possible inputs: \"TF-IDF\", \"TF-DF\", \"binary\"",
             "corpus/text name": "Insert corpus/text name"
         },
+        "propertyDefaultValues": {
+            "name": "SuffixTreeVectorizationWrapper",
+            "vector type": "TF-IDF"
+        },
         "inputPorts": [
             {
                 "name": "KWIP xml Result",
@@ -2403,6 +2794,12 @@ export default [
             "encode delimiters": "Encode/decode input delimiters same as tokens [true] or keep them as they are [false].",
             "input token delimiter": "Part of a regular expression to use as token delimiter (also applicable if decoding when the input delimiters have not been encoded). With the default value<pre>[\\s\\n\\r]</pre>the full regex would be<pre>((?<=[\\s\\n\\r])|(?=[\\s\\n\\r]))</pre>This is in order to get both the tokens <i>and</i> the delimiters from the scanner that parses the input. Only single char matches are supported.",
             "direction": "Direction [encode|decode]. Decoding requires input both on port 'input' and 'dictionary'"
+        },
+        "propertyDefaultValues": {
+            "name": "Text Reducer",
+            "encode delimiters": "false",
+            "input token delimiter": "[\\s\\n\\r]",
+            "direction": "encode"
         },
         "inputPorts": [
             {
@@ -2450,6 +2847,14 @@ export default [
             "input delimiter": "Regular expression used as an input text segment delimiter.",
             "order": "Sort order [ascending|descending]."
         },
+        "propertyDefaultValues": {
+            "output delimiter": "\\n",
+            "unique": "false",
+            "name": "Text Sorter",
+            "sort by": "length",
+            "input delimiter": "\\R+",
+            "order": "ascending"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2477,6 +2882,10 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name",
             "Print out tree frequencies?": "\"true\": show tree frequencies</br>\"false\": do not show tree frequencies"
+        },
+        "propertyDefaultValues": {
+            "name": "Tree Index Properties",
+            "Print out tree frequencies?": "false"
         },
         "inputPorts": [
             {
@@ -2517,6 +2926,14 @@ export default [
             "maximum threads": "Maximum number of parallel threads the module will spawn (in addition to its own thread and the ProgressWatcher's).",
             "minimum amount of tokens": "Minimum amount of tokens a type must have to enter comparison."
         },
+        "propertyDefaultValues": {
+            "minimum similarity": "0.0",
+            "maximum comparison depth": "-1",
+            "name": "Tree Similarity Clustering",
+            "status update interval (ms)": "10000",
+            "maximum threads": "8",
+            "minimum amount of tokens": "1"
+        },
         "inputPorts": [
             {
                 "name": "suffix tree",
@@ -2553,6 +2970,11 @@ export default [
             "Omit redundant info": "Omit redundant information upon creating the tree (do not set nodevalue, since this info is already contained within the parent's child node mapping key).",
             "Compact or atomic?": "Type of suffix tree to output; possible values are 'compact' and 'atomic'."
         },
+        "propertyDefaultValues": {
+            "name": "TreeBuilder v2 Module",
+            "Omit redundant info": "true",
+            "Compact or atomic?": "compact"
+        },
         "inputPorts": [
             {
                 "name": "text",
@@ -2586,6 +3008,15 @@ export default [
             "Tree depth": "Maximum depth for the resulting tree; set to -1 for no constraint. A setting of 0 will yield a tree one level deep that contains nodes with a length of one (basically the alphabet of the input, respectively the first element of any document for GSTs).",
             "Input delimiter (outer)": "<p>The <i>outer input delimiter</i> is used to discern strings from each other that will be inserted into the resulting tree independently, resulting into a <i>Generalised Suffix Tree</i>.</p><p>The value is interpreted as a <i>Regular Expression</i>, e.g. '$' marks the end of a line and '\\$' means the actual dollar sign; set to '\\z' for single string input.</p>"
         },
+        "propertyDefaultValues": {
+            "Output delimiter": " ",
+            "name": "TreeBuilder v3 Module",
+            "Input delimiter (inner)": "[\\s]+",
+            "Omit redundant info": "true",
+            "Compact or atomic?": "compact",
+            "Tree depth": "-1",
+            "Input delimiter (outer)": "\\$"
+        },
         "inputPorts": [
             {
                 "name": "text",
@@ -2613,6 +3044,9 @@ export default [
         "propertyDescriptions": {
             "name": "The module instance's name"
         },
+        "propertyDefaultValues": {
+            "name": "TreeBuilder2Output"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2639,6 +3073,9 @@ export default [
         "category": "format conversion",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "TreeBuilder2OutputV2"
         },
         "inputPorts": [
             {
@@ -2669,6 +3106,12 @@ export default [
             "Build trie instead of tree": "Set to true if you want to construct a trie instead of a tree.",
             "name": "The module instance's name",
             "Maximum length of branches": "Define the maximum length of any branch of the tree."
+        },
+        "propertyDefaultValues": {
+            "Reverse order": "false",
+            "Build trie instead of tree": "true",
+            "name": "Treebuilder",
+            "Maximum length of branches": "-1"
         },
         "inputPorts": [
             {
@@ -2701,6 +3144,13 @@ export default [
             "input CSV delimiter regex": "Input CSV delimiter regex.",
             "exponent": "Exponent for aberration amplification [double]; Aberration is taken times 2^E. Takes effect if value is above zero."
         },
+        "propertyDefaultValues": {
+            "output CSV delimiter": ",",
+            "name": "Vector Aberration Calculator",
+            "sort output": "true",
+            "input CSV delimiter regex": "[\\,;]",
+            "exponent": "0.0"
+        },
         "inputPorts": [
             {
                 "name": "csv",
@@ -2727,6 +3177,9 @@ export default [
         "category": "vectorization",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "Vector Median Calculator"
         },
         "inputPorts": [
             {
@@ -2756,6 +3209,10 @@ export default [
             "name": "The module instance's name",
             "Newick branch length": "Choose branch length in Newick: true = by string; false = by node occurence"
         },
+        "propertyDefaultValues": {
+            "name": "seqNewickExporter",
+            "Newick branch length": "true"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2784,6 +3241,10 @@ export default [
             "name": "The module instance's name",
             "Newick branch length": "Choose branch length in Newick: true = by string; false = by node occurence"
         },
+        "propertyDefaultValues": {
+            "name": "seqNewickExporterV2",
+            "Newick branch length": "true"
+        },
         "inputPorts": [
             {
                 "name": "input",
@@ -2810,6 +3271,9 @@ export default [
         "category": "tree editing",
         "propertyDescriptions": {
             "name": "The module instance's name"
+        },
+        "propertyDefaultValues": {
+            "name": "seqSuffixTrie2SuffixTree"
         },
         "inputPorts": [
             {

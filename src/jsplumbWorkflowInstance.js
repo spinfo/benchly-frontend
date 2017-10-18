@@ -77,8 +77,9 @@ function jsPlumpWorkflowInstanceInit(onConnectionDelegate) {
         //       present on the canvas
         instance._bly_initModuleGroup = function(el, connections = []) {
 
-            // make the whole area draggable
-            instance.draggable(el)
+            // make the module's area draggable
+            const moduleElem = el.getElementsByClassName('bly-module')[0]
+            instance.draggable(moduleElem)
 
             // make output ports into sources where a connection may be drawn from
             var outputsElem = el.getElementsByClassName('bly-output-ports')[0]

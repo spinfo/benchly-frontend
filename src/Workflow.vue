@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h2>Modules</h2>
+        <h2>Workflow</h2>
 
         <div id="available-modules">
             <ul>
-                <li v-for="(profiles, category) in availableModuleProfiles">
+                <li v-for="(profiles, category) in moduleProfilesByCategory">
                     <module-category :name="category" :module-profiles="profiles" v-on:newmodule="addModuleToCanvas"></module-category>
                 </li>
             </ul>
@@ -29,7 +29,9 @@
             <div id="workflow-canvas" v-show="isActiveTab('canvas')">
                 <div id="canvas">
                     <div v-for="module in modules" :key="module.getId()">
-                        <module :module="module" v-on:moduleremoved="removeModuleFromCanvas"></module>
+                        <module :module="module"
+                            :property-descriptions="propertyDescriptionsForModule(module)"
+                            v-on:moduleremoved="removeModuleFromCanvas"></module>
                     </div>
                 </div>
             </div>
@@ -59,7 +61,8 @@ export default {
     data: function() {
         return {
             workflow: null,
-            availableModuleProfiles: {},
+            moduleProfilesByCategory: {},
+            moduleProfilesByClass: {},
             activeTab: 'canvas'
         }
     },
@@ -89,8 +92,9 @@ export default {
         // connection changes
         jsPlumpWorkflowInstanceInit(this)
         // fetch some data to display
-        this.fetchExampleWorkflow()
+        // TODO: Make sure these happen one after the other once no longer mocked
         this.fetchModuleProfiles()
+        this.fetchExampleWorkflow()
     },
 
     methods: {
@@ -146,15 +150,20 @@ export default {
         // fetch the list of available modules from the api
         fetchModuleProfiles: function() {
             const profiles = mockModuleProfiles
-            var byCat = {}
-            for (var i = 0; i < profiles.length; i++) {
-                var profile = profiles[i]
+            const byCat = {}
+            const byClass = {}
+            for (let i = 0; i < profiles.length; i++) {
+                const profile = profiles[i]
+
+                byClass[profile.canonicalClassName] = profile
+
                 if (!byCat[profile.category]) {
                     byCat[profile.category] = Array()
                 }
                 byCat[profile.category].push(profile)
             }
-            this.availableModuleProfiles = byCat
+            this.moduleProfilesByCategory = byCat
+            this.moduleProfilesByClass = byClass
         },
 
         fetchExampleWorkflow: function() {
@@ -205,6 +214,15 @@ export default {
         // remove a connection from the workflow (should already have been removed from canvas)
         removeConnection: function(sourceId, targetId) {
             this.workflow.removeConnection(sourceId, targetId)
+        },
+
+        propertyDescriptionsForModule: function(module) {
+            const profile = this.moduleProfilesByClass[module.getClassName()]
+            if (profile == null) {
+                console.warn("Could not find profile for class: " + module.getClassName())
+                return {}
+            }
+            return profile.propertyDescriptions
         },
 
         // sets x/y positions on a number of module rows depending on the position of the module

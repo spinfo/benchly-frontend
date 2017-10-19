@@ -49,7 +49,7 @@ import mockWorkflow from './assets/mockWorkflow.js'
 import mockModuleProfiles from './assets/mockModuleProfiles.js'
 
 // jsplumb for drawing and editing a workflow's module graph
-import jsplumb from './assets/jsplumb.js'
+import jsplumb from './assets/jsplumb.min.js'
 import jsPlumpWorkflowInstanceInit from './jsplumbWorkflowInstance.js'
 
 import Workflow from './models/Workflow.js'

@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import VModal from 'vue-js-modal'
-import VTooltip from 'v-tooltip'
 
 import Workflow from './Workflow.vue'
 import ModuleCategory from './ModuleCategory.vue'
@@ -11,7 +10,6 @@ import ModulePropertiesEditor from './ModulePropertiesEditor.vue'
 
 Vue.use(VueRouter)
 Vue.use(VModal)
-Vue.use(VTooltip)
 
 Vue.component('module-category', ModuleCategory)
 Vue.component('module', Module)

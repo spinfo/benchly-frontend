@@ -29,8 +29,7 @@
             <div id="workflow-canvas" v-show="isActiveTab('canvas')">
                 <div id="canvas">
                     <div v-for="module in modules" :key="module.getId()">
-                        <module :module="module"
-                            :property-descriptions="propertyDescriptionsForModule(module)"
+                        <module :module="module" :profile="getModuleProfile(module)"
                             v-on:moduleremoved="removeModuleFromCanvas"></module>
                     </div>
                 </div>
@@ -216,13 +215,13 @@ export default {
             this.workflow.removeConnection(sourceId, targetId)
         },
 
-        propertyDescriptionsForModule: function(module) {
+        getModuleProfile: function(module) {
             const profile = this.moduleProfilesByClass[module.getClassName()]
             if (profile == null) {
                 console.warn("Could not find profile for class: " + module.getClassName())
                 return {}
             }
-            return profile.propertyDescriptions
+            return profile
         },
 
         // sets x/y positions on a number of module rows depending on the position of the module

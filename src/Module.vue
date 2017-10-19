@@ -2,22 +2,22 @@
     <div>
         <div :id="id" class="bly-module" :style="style">
             <button class="bly-module-btn" v-on:click="removeModule()">
-                ❌
+                <b>❌</b>
             </button>
             <button class="bly-module-btn" v-on:click="openPropertiesEditor()">
-                <b>&nbsp;i&nbsp;</b>
+                <b>P</b>
             </button>
 
             <div>{{ name }}</div>
 
             <div style="margin-top: 10px">
                 <div style="float: left;" class="bly-input-ports">
-                    <div v-for="port in inputPorts" class="bly-port" :id="port.instanceHashCode">
+                    <div v-for="port in inputPorts" class="bly-port" :id="port.instanceHashCode" :title="portDescriptions[port.name]">
                         {{ port.name }}
                     </div>
                 </div>
                 <div style="float: left; margin-left: 10px" class="bly-output-ports">
-                    <div v-for="port in outputPorts" class="bly-port bly-output-port" :id="port.instanceHashCode">
+                    <div v-for="port in outputPorts" class="bly-port bly-output-port" :id="port.instanceHashCode" :title="portDescriptions[port.name]" >
                         {{ port.name }}
                     </div>
                 </div>
@@ -32,7 +32,7 @@
             :scrollable="true">
             <module-properties-editor
                 :initial-state="moduleProperties"
-                :property-descriptions="propertyDescriptions"
+                :property-descriptions="profile.propertyDescriptions"
                 v-on:module-properties-saved="saveProperties" />
         </modal>
     </div>
@@ -43,8 +43,7 @@
 export default {
     props: {
         module: Object,
-        // these will be passed right through to the properties editor
-        propertyDescriptions: Object
+        profile: Object
     },
     data: function() {
         return {
@@ -68,6 +67,13 @@ export default {
                 return this.module.getProperties()
             }
             return {}
+        },
+        portDescriptions: function() {
+            const result = {}
+            const collectFun = (profile) => { result[profile.name] = profile.description }
+            this.profile.inputPorts.forEach(collectFun)
+            this.profile.outputPorts.forEach(collectFun)
+            return result
         }
     },
     mounted: function () {

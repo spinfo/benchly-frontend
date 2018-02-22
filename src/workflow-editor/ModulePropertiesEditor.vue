@@ -14,7 +14,7 @@
 
 
 <script>
-import BlyUtil from './util.js'
+import BlyUtil from '../util.js'
 
 export default {
     props: {

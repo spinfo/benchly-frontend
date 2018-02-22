@@ -1,7 +1,8 @@
 
 import Module from './Module.js'
-import BlyUtil from '../util.js'
+import BlyUtil from '../../util.js'
 
+// TODO: This should be named workflow definition
 export default Workflow
 
 /**

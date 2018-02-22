@@ -1,7 +1,7 @@
 
 export default {
 
-    // a benchly id is just a random integer
+    // generates a random id to use on html elements
     generateId: function() {
         return parseInt(Math.random() * Number.MAX_SAFE_INTEGER)
     },
@@ -24,7 +24,7 @@ export default {
         return this.isArray(maybeArray) && maybeArray.length > 0
     },
 
-    // a naive shallow copy
+    // a naive non-recursive object copy
     shallowCopy: function(obj) {
         const clone = {}
         for (var key in obj) {
@@ -45,7 +45,7 @@ export default {
         document.execCommand('copy');
     },
 
-    // save data to a file with the argument's name and mime type
+    // offer the user to save data to a file with the argument's name and mime type
     saveToFile: function(data, filename, type) {
         var file = new Blob([data], {type: type});
         if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -64,6 +64,7 @@ export default {
         }
     },
 
+    // retrieve a cookies contents by its name
     getCookie: function(name) {
         var dc = document.cookie;
         var prefix = name + "=";
@@ -81,12 +82,15 @@ export default {
         return decodeURI(dc.substring(begin + prefix.length, end));
     },
 
+    // set the expiration date of a cookie to far far ago
     expireCookie: function(name) {
         if (this.getCookie(name)) {
             this.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
         }
     },
 
+    // input a String get back an integer if possible, default to the
+    // default value if the integer is smaller than zero
     parsePositiveInt: function(str, defaultVal) {
         var result = parseInt(str)
 

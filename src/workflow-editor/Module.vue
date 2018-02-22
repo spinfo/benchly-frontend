@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <!-- Each modal needs to be at the same level as it's module to not be overlayed by other modules -->
+        <!-- Each modal needs to be at the same level as its module to not be overlayed by other modules -->
         <modal :name="propertiesEditorName"
             height="auto"
             width="50%"

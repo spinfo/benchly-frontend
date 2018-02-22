@@ -3,7 +3,7 @@
         <nav class="nav" tabindex="-1" onclick="this.focus()">
             <div class="container">
                 <router-link v-on:click.native="clearMessages" to="/" class="pagename current">Benchly</router-link>
-                <router-link v-on:click.native="clearMessages" to="/workflow">Workflow</router-link>
+                <router-link v-on:click.native="clearMessages" to="/workflows">Workflows</router-link>
                 <router-link v-on:click.native="clearMessages" to="/jobs">Jobs</router-link>
                 <router-link v-on:click.native="clearMessages" to="/resources">Resources</router-link>
                 <router-link v-on:click.native="clearMessages" to="/manage">Manage</router-link>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import Api from './api.js'
 import BlyUtil from './util.js'
 import UserMessage from './models/UserMessage.js'
 
@@ -50,7 +51,7 @@ export default {
         const cookie = this.getSessionCookie()
         const self = this
         if (!!cookie) {
-            this.$http.get('api/v1/session').then(function(data) {
+            Api.getSession(this, function(data) {
                 self.setUser(data.body.content);
             })
         }
@@ -71,21 +72,25 @@ export default {
         },
         doLogout: function() {
             const self = this
-            this.$http.delete('api/v1/session').then(function() {
+            Api.deleteSession(this, function() {
                 self.setUser(null)
                 self.removeSessionCookie()
                 self.clearMessages()
                 self.addMessage(UserMessage.ok("You have been logged out."))
                 self.$router.push('/login')
-            }, function(data) {
-                self.addMessage(UserMessage.error("Unexpected error on user logout"))
-                console.error(data)
+            }, function() {
+                // use a custom callbock, because those $emitted by Api won't register
+                // with the global component
+                self.addMessage(UserMessage.error("Unexpected error on user logout."))
             })
         },
         addMessage: function(msg) {
             this.messages.push(msg)
         },
         addMessages: function(messages) {
+            if (!BlyUtil.isArray(messages)) {
+                return
+            }
             for (let i = 0; i < messages.length; i++) {
                 this.addMessage(messages[i])
             }

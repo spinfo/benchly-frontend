@@ -57,6 +57,7 @@ import BlyUtil from './util.js'
 
 
 export default {
+    props: [ 'versionId', 'id'],
     data: function() {
         return {
             workflow: null,
@@ -93,7 +94,11 @@ export default {
         // fetch some data to display
         // TODO: Make sure these happen one after the other once no longer mocked
         this.fetchModuleProfiles()
-        this.fetchExampleWorkflow()
+        this.fetchWorkflow()
+    },
+
+    watch: {
+        '$route': function() { this.fetchWorkflow() }
     },
 
     methods: {
@@ -144,6 +149,11 @@ export default {
             window.jsp.batch(function() {
                 self.modules.forEach(function(m) { self.removeModuleFromCanvas(m) })
             })
+        },
+
+        fetchWorkflow: function() {
+            console.log('vId: ' + this.versionId)
+            console.log('id: ' + this.id)
         },
 
         // fetch the list of available modules from the api

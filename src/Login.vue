@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Api from './api.js'
 import UserMessage from './models/UserMessage.js'
 
 export default {
@@ -30,18 +31,11 @@ export default {
     },
     methods: {
         tryLogin() {
-            this.$http.post('api/v1/session', this.userInput).then(this.onLoginOk, this.onLoginFail)
-        },
-        onLoginOk(data) {
-            this.$emit('userlogin', data.body.user)
-            this.$emit('newmessages', [UserMessage.ok("You have been logged in.")])
-        },
-        onLoginFail(data) {
-            if (data.body.messages) {
-                this.$emit('newmessages', data.body.messages)
-            } else {
-                console.error("User login failed without messages.")
-            }
+            const self = this
+            Api.postSession(this, this.userInput, function(data) {
+                self.$emit('userlogin', data.body.user)
+                self.$emit('newmessages', [UserMessage.ok("You have been logged in.")])
+            })
         }
     }
 }

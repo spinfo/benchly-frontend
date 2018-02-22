@@ -16,6 +16,14 @@ export default {
         return true;
     },
 
+    isArray: function(maybeArray) {
+        return !!maybeArray && (maybeArray.constructor === Array)
+    },
+
+    isNonEmptyArray: function(maybeArray) {
+        return this.isArray(maybeArray) && maybeArray.length > 0
+    },
+
     // a naive shallow copy
     shallowCopy: function(obj) {
         const clone = {}
@@ -77,6 +85,15 @@ export default {
         if (this.getCookie(name)) {
             this.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
         }
+    },
+
+    parsePositiveInt: function(str, defaultVal) {
+        var result = parseInt(str)
+
+        if (isNaN(result) || result < 0) {
+            result = defaultVal
+        }
+        return result
     }
 }
 

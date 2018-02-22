@@ -6,7 +6,7 @@ export default Workflow
 
 /**
  * Wraps a workflow of many modules and lets us interact with it.
- * The outside should only interact with one of these objects
+ * The outside should only interact with one of these.
  */
 function Workflow() {
 

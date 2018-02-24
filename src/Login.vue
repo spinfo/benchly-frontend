@@ -34,7 +34,8 @@ export default {
             const self = this
             Api.postSession(this, this.userInput, function(data) {
                 self.$emit('userlogin', data.body.user)
-                self.$emit('newmessages', [UserMessage.ok("You have been logged in.")])
+                // TODO: Only do this if we actually were on the site before...
+                self.$router.go(-1)
             })
         }
     }

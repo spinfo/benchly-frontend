@@ -2,17 +2,17 @@
     <div id="app">
         <nav class="nav" tabindex="-1" onclick="this.focus()">
             <div class="container">
-                <router-link v-on:click.native="clearMessages" to="/" class="pagename current">Benchly</router-link>
-                <router-link v-on:click.native="clearMessages" to="/workflows">Workflows</router-link>
-                <router-link v-on:click.native="clearMessages" to="/jobs">Jobs</router-link>
-                <router-link v-on:click.native="clearMessages" to="/resources">Resources</router-link>
-                <router-link v-on:click.native="clearMessages" to="/manage">Manage</router-link>
+                <router-link to="/" class="pagename current">Benchly</router-link>
+                <router-link to="/workflows">Workflows</router-link>
+                <router-link to="/jobs">Jobs</router-link>
+                <router-link to="/resources">Resources</router-link>
+                <router-link to="/manage">Manage</router-link>
                 |&nbsp;&nbsp;&nbsp;
                 <span v-if="user">
-                    <router-link v-on:click.native="clearMessages" :to="userRoute(user)">{{user.name}}</router-link>
+                    <router-link :to="userRoute(user)">{{user.name}}</router-link>
                     <a href="#" v-on:click="doLogout">Logout</a>
                 </span>
-                <router-link v-else v-on:click.native="clearMessages" to="/login">Login</router-link>
+                <router-link v-else to="/login">Login</router-link>
             </div>
         </nav>
 
@@ -75,14 +75,17 @@ export default {
             Api.deleteSession(this, function() {
                 self.setUser(null)
                 self.removeSessionCookie()
-                self.clearMessages()
-                self.addMessage(UserMessage.ok("You have been logged out."))
-                self.$router.push('/login')
+                self.$router.push('/login',
+                    self.messageOnLogout, self.messageOnLogout)
             }, function() {
                 // use a custom callbock, because those $emitted by Api won't register
                 // with the global component
-                self.addMessage(UserMessage.error("Unexpected error on user logout."))
+                const msg = "Unexpected error on user logout."
+                self.addMessage(UserMessage.error(msg))
             })
+        },
+        messageOnLogout: function() {
+            this.addMessage(UserMessage.ok("You have been logged out."))
         },
         addMessage: function(msg) {
             this.messages.push(msg)
@@ -98,7 +101,13 @@ export default {
         clearMessages: function() {
             this.messages.splice(0)
         }
-    }
+    },
+    watch: {
+        '$route': function() {
+            console.log("clearing messages")
+            this.clearMessages()
+        }
+    },
 }
 </script>
 

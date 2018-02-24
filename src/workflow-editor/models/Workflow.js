@@ -6,8 +6,8 @@ import BlyUtil from '../../util.js'
 export default Workflow
 
 /**
- * Wraps a workflow of many modules and lets us interact with it.
- * The outside should only interact with one of these.
+ * Wraps a workflow definition (a bunch of module definitons) and lets us
+ * interact with it to hide the hairy details about modules etc.
  */
 function Workflow() {
 

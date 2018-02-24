@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div id="available-modules">
+    <div id="workflow-editor" class="row">
+        <div id="available-modules-area" class="col c4">
             <ul>
                 <li v-for="(profiles, category) in moduleProfilesByCategory">
                     <module-category :name="category" :module-profiles="profiles" v-on:newmodule="addModuleToCanvas"></module-category>
@@ -8,19 +8,20 @@
             </ul>
         </div>
 
-        <div id="workflow-creation-area">
+        <div id="workflow-creation-area" class="col c8">
             <div id="workflow-nav">
-                <a href='#' class="tab" v-on:click="activateTab('canvas')">Workflow</a>
-                <a href='#' class="tab" v-on:click="activateTab('definition')">JSON</a>
+                <button class="tab" v-on:click="activateTab('canvas')">Workflow</button>
+                <button class="tab" v-on:click="activateTab('definition')">JSON</button>
 
                 <div style="float: right;">
-                    <a href="#" class="tab-bar-action-item" v-on:click="clearWorkflow">Clear</a> |
-                    <a href="#" class="tab-bar-action-item" v-on:click="copyWorkflow">Copy</a> |
+                    <button class="tab-bar-action-item" v-on:click="requestSave">Save</button> |
+                    <button class="tab-bar-action-item" v-on:click="clearWorkflow">Clear</button> |
+                    <button class="tab-bar-action-item" v-on:click="copyWorkflow">Copy</button> |
                     <!-- TODO: This could be in a component -->
-                    <a href="#" class="tab-bar-action-item" v-on:click="triggerFileInput">
+                    <button class="tab-bar-action-item" v-on:click="triggerFileInput">
                         Von Datei <input id="hidden-file-input" style="display: none;" type="file">
-                    </a> |
-                    <a href="#" class="tab-bar-action-item" v-on:click="downloadWorkflow">Download</a>
+                    </button> |
+                    <button class="tab-bar-action-item" v-on:click="downloadWorkflow">Download</button>
                 </div>
             </div>
 
@@ -34,7 +35,7 @@
             </div>
 
             <div id="workflow-definition" v-show="isActiveTab('definition')">
-                <pre id="workflow-definition-json">{{ definitions }}</pre>
+                <pre id="workflow-definition-json">{{ pureModuleDefinitionsAsJSON }}</pre>
             </div>
         </div>
     </div>
@@ -43,7 +44,6 @@
 <script>
 // mock objects that stand in for the actual api
 import mockModuleProfiles from '../assets/mockModuleProfiles.js'
-import mockWorkflow from '../assets/mockWorkflow.js'
 
 // jsplumb for drawing and editing a workflow's module graph
 import jsplumb from '../assets/jsplumb.min.js'
@@ -55,6 +55,7 @@ import ModuleCategory from './ModuleCategory.vue'
 import BlyUtil from '../util.js'
 
 export default {
+    props: ['workflow-definition'],
     data: function() {
         return {
             workflow: null,
@@ -72,15 +73,19 @@ export default {
                 return []
             }
         },
-        definitions: function() {
+        // return just the module definitions without their object wrapper
+        pureModuleDefinitions: function() {
             if (this.workflow) {
-                const defs = this.workflow.getModules().map(function(m) {
+                const definitions = this.workflow.getModules().map(function(m) {
                     return m._definition
                 })
                 // just stringify the definitions using 4 spaces for indentations
-                return JSON.stringify(defs, null, 4)
+                return definitions
             }
-            return ""
+            return []
+        },
+        pureModuleDefinitionsAsJSON: function() {
+            return JSON.stringify(this.pureModuleDefinitions, null, 4)
         }
     },
 
@@ -90,13 +95,17 @@ export default {
         jsPlumpWorkflowInstanceInit(this)
         // fetch some data to display
         this.fetchModuleProfiles()
-        // TODO: Delete two lines
-        const moduleDefinitions = mockWorkflow
-        this.addModuleDefinitionsToWorkflow(moduleDefinitions)
+        // initialise the workflow by adding all modules provided in the workflow
+        // definition
+        this.addModuleDefinitionsToWorkflow(this.workflowDefinition)
     },
 
     watch: {
-        '$route': function() { this.fetchWorkflow() }
+        // this should happen as seldom as possible so we use a watch instead
+        // of a computed property
+        'workflowDefinition': function() {
+            this.addModuleDefinitionsToWorkflow(this.workflowDefinition)
+        }
     },
 
     methods: {
@@ -117,7 +126,7 @@ export default {
 
         // offer the user to download the module definitions as a file
         downloadWorkflow: function() {
-            BlyUtil.saveToFile(this.definitions, "workflow.exp", "text/json")
+            BlyUtil.saveToFile(this.pureModuleDefinitionsAsJSON, "workflow.exp", "text/json")
         },
 
         triggerFileInput: function() {
@@ -169,6 +178,9 @@ export default {
         },
 
         addModuleDefinitionsToWorkflow: function(definitions) {
+            if (!definitions) {
+                definitions = []
+            }
             const workflow = Workflow.fromDefinitions(definitions)
 
             // set positioning metadata based on the workflows tree structure
@@ -237,6 +249,11 @@ export default {
                 }
                 y += gridHeight
             }
+        },
+
+        requestSave: function() {
+            // send the definitions to be saved, hide the workflow object
+            this.$emit('saveworkflow', this.pureModuleDefinitions)
         }
     }
 }
@@ -244,26 +261,25 @@ export default {
 
 
 <style>
-#available-modules {
-    border: 1px solid black;
+#workflow-editor {
+    margin-top: 5px;
+    padding-top: 20px;
+}
+
+#available-modules-area {
+    border: 1px solid #CCC;
     float: left;
-    height: 100%;
     width: 30%;
     margin-top: 0;
     margin-right: 2%;
+    /* TODO: Adjust for different screen sizes */
+    max-height: 600px;
     overflow: scroll;
 }
 
 #workflow-creation-area {
     margin-left: 0;
     float: left;
-    height: 100%;
-    width: 55%;
-    max-height:700px;
-}
-
-#workflow-creation-area > * {
-    width: 95%;
 }
 
 #workflow-definition {
@@ -273,9 +289,8 @@ export default {
 }
 
 #canvas {
-    width: 100%;
-    height: 100%;
-    min-height: 750px;
+    /* TODO: Adjust for different screen sizes */
+    min-height: 600px;
     border:1px solid #CCC;
     background-color:white;
     display: flex;
@@ -300,7 +315,18 @@ export default {
     margin-bottom: 10px;
 }
 
-#workflow-nav > a.tab {
+#workflow-nav button {
+     background:none;
+     color:inherit;
+     border:none;
+     padding:0;
+     font: inherit;
+     /*border is optional*/
+     /*border-bottom:1px solid #444; */
+     cursor: pointer;
+}
+
+#workflow-nav > button.tab {
     margin-right: 3px;
     text-decoration: none;
     color: #2ca9d3;
@@ -310,15 +336,11 @@ export default {
     padding: 5px;
 }
 
-#workflow-nav a.tab-bar-action-item {
+#workflow-nav button.tab-bar-action-item {
     margin-left: 3px;
     text-decoration: none;
     color: #2ca9d3;
     font-size: small;
 }
 
-.mini-button-bar > button {
-    margin-left: 3px;
-    margin-right: 3px;
-}
 </style>

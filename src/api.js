@@ -6,7 +6,7 @@ import UserMessage from './models/UserMessage.js'
 //  https://vuejs.org/v2/guide/plugins.html
 export default {
 
-    rootPath: "api/v1",
+    root: "api/v1",
 
     workflowsPath: "/workflows",
     sessionPath: "/session",
@@ -21,29 +21,49 @@ export default {
         return component.$http.post(path, data).then(onSuccess, errCb)
     },
 
+    put: function(component, path, data, onSuccess, onFailure) {
+        const errCb = this.buildErrorCallback(component, onFailure)
+        return component.$http.put(path, data).then(onSuccess, errCb)
+    },
+
     delete: function(component, path, onSuccess, onFailure) {
         const errCb = this.buildErrorCallback(component, onFailure)
         return component.$http.delete(path).then(onSuccess, errCb)
     },
 
     getWorkflows: function(component, limit, offset, onSuccess) {
-        const path = this.rootPath + this.workflowsPath
+        const path = this.root + this.workflowsPath
         const params = { limit: limit, offset: offset }
         return this.get(component, path, params, onSuccess, null)
     },
 
+    getWorkflowByVersionId: function(component, versionId, onSuccess) {
+        const path = this.root + this.workflowsPath + '/' + versionId
+        return this.get(component, path, {}, onSuccess, null)
+    },
+
+    putWorkflow: function(component, workflow, onSuccess) {
+        const path = this.root + this.workflowsPath + "/" + workflow.versionId
+        return this.put(component, path, workflow, onSuccess, null)
+    },
+
+    postWorkflow: function(component, workflow, onSuccess) {
+        const path = this.root + this.workflowsPath
+        return this.post(component, path, workflow, onSuccess, null)
+    },
+
     getSession: function(component, onSuccess) {
-        const path = this.rootPath + this.sessionPath
+        const path = this.root + this.sessionPath
         return this.get(component, path, {}, onSuccess, this.emptyCallback)
     },
 
     postSession: function(component, data, onSuccess) {
-        const path = this.rootPath + this.sessionPath
+        const path = this.root + this.sessionPath
         return this.post(component, path, data, onSuccess, null)
     },
 
     deleteSession: function(component, onSuccess, onFailure) {
-        const path = this.rootPath + this.sessionPath
+        const path = this.root + this.sessionPath
         return this.delete(component, path, onSuccess, onFailure)
     },
 

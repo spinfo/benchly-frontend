@@ -7,7 +7,7 @@
 
         <input v-if="redirectTarget" type="hidden" name="redirectTarget" value="$redirectTarget">
 
-        <input class="smooth" type="text" name="nameOrEmail" placeholder="Name / Email" required v-model="userInput.nameOrEmail">
+        <input class="smooth" type="email" name="email" placeholder="Email" required v-model="userInput.email">
         <input class="smooth" type="password" name="password" placeholder="Password" required v-model="userInput.password">
 
         <input class="btn btn-b btn-sm smooth" type="submit" value="Login">
@@ -24,7 +24,7 @@ export default {
         return {
             redirectTarget: String, // make this a prop, needed?
             userInput: {
-                nameOrEmail: "",
+                email: "",
                 password: ""
             }
         }

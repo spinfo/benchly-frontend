@@ -7,6 +7,8 @@ import App           from './App.vue'
 import Workflow      from './Workflow.vue'
 import WorkflowIndex from './WorkflowIndex.vue'
 import Login         from './Login.vue'
+import JobNew        from './JobNew.vue'
+
 import BlyUtil       from './util.js'
 
 Vue.use(VueRouter)
@@ -49,6 +51,7 @@ const routes = [
         component: Workflow
     },
     {
+        name: 'workflow-edit',
         path: '/workflows/:versionId',
         component: Workflow,
         props: true
@@ -61,6 +64,12 @@ const routes = [
     {
         path: '/jobs',
         component: Jobs
+    },
+    {
+        name: 'job-new',
+        path: '/workflows/:versionId/submit',
+        component: JobNew,
+        props: true
     }
 ]
 

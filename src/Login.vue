@@ -3,11 +3,11 @@
     <h1>Login</h1>
 
     <form v-on:submit.prevent="tryLogin">
-        <label>Login</label>
 
-        <input v-if="redirectTarget" type="hidden" name="redirectTarget" value="$redirectTarget">
-
+        <label>Email</label>
         <input class="smooth" type="email" name="email" placeholder="Email" required v-model="userInput.email">
+
+        <label>Password</label>
         <input class="smooth" type="password" name="password" placeholder="Password" required v-model="userInput.password">
 
         <input class="btn btn-b btn-sm smooth" type="submit" value="Login">

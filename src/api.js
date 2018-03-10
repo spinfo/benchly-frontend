@@ -9,7 +9,8 @@ export default {
     root: "api/v1",
 
     workflowsPath: "/workflows",
-    sessionPath: "/session",
+    sessionPath:   "/session",
+    jobsPath:      "/jobs",
 
     get: function(component, path, params, onSuccess, onFailure) {
         const errCb = this.buildErrorCallback(component, onFailure)
@@ -65,6 +66,11 @@ export default {
     deleteSession: function(component, onSuccess, onFailure) {
         const path = this.root + this.sessionPath
         return this.delete(component, path, onSuccess, onFailure)
+    },
+
+    postJob: function(component, job, onSuccess) {
+        const path = this.root + this.jobsPath
+        return this.post(component, path, job, onSuccess, null)
     },
 
     // if callback is non-null just return it, else build a funcion that will call the

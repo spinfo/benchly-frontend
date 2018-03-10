@@ -35,7 +35,7 @@ export default {
     methods: {
         fetchWorkflow: function() {
             if (!!this.versionId && !!this.id) {
-                // TODO
+                // TODO: Retrieve a specific workflow version
             } else if (!!this.versionId) {
                 const self = this
                 Api.getWorkflowByVersionId(this, this.versionId, function(data) {
@@ -45,14 +45,19 @@ export default {
         },
         saveWorkflow: function(moduleDefinitions) {
             const self = this
+
             // the backend expects the definition to just be a string
             const workflow = BlyUtil.shallowCopy(this.workflow)
             workflow.definition = JSON.stringify(moduleDefinitions, null, 4)
+
+            // the workflow exists and is updated
             if (workflow.versionId) {
                 Api.putWorkflow(this, workflow, function(data) {
                     self.$emit("newmessages", [ UserMessage.ok("Saved") ])
                 })
-            } else {
+            }
+            // a new workflow is created
+            else {
                 Api.postWorkflow(this, workflow, function(data) {
                     const workflow = data.body.content
                     const redirect = { path: `/workflows/${workflow.versionId}` }

@@ -2,7 +2,7 @@
 <div>
     <h2>Workflows</h2>
 
-    <div>
+    <div id="workflow-links">
         <router-link to="workflows/new">New Workflow</router-link>
     </div>
 
@@ -10,32 +10,32 @@
 
         <pagination :offset="offset" :limit="limit" :max="max"></pagination>
 
-        <table class="table">
+        <table id="workflows-table" class="table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Author</th>
-                    <th><!-- Edit --></th>
-                    <th><!-- Delete --></th>
+                    <th><!-- Run --></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="workflow in workflows">
                     <td>
-                        {{ workflow.id }} ({{ workflow.versionId }})
+                        {{ workflow.id }}
                     </td>
                     <td>
-                        <a href="#">{{ workflow.name }}</a>
+                        <router-link :to="{ name: 'workflow-edit', params: { versionId: workflow.versionId }}">
+                            {{ workflow.name }}
+                        </router-link>
                     </td>
                     <td>
                         {{ workflow.author.name }}
                     </td>
                     <td>
-                        <router-link :to="routeTo(workflow)">Edit</router-link>
-                    </td>
-                    <td>
-                        <a href="#">Delete</a>
+                        <router-link :to="{ name: 'job-new', params: { versionId: workflow.versionId }}">
+                            Run
+                        </router-link>
                     </td>
                 </tr>
             </tbody>
@@ -87,3 +87,16 @@ export default {
 }
 
 </script>
+
+<style>
+
+#workflows-table {
+    width: 80%;
+}
+
+#workflow-links {
+    margin-bottom: 15px;
+}
+
+
+</style>

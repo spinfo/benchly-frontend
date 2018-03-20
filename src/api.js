@@ -68,9 +68,19 @@ export default {
         return this.delete(component, path, onSuccess, onFailure)
     },
 
+    getJobById: function(component, jobId, onSuccess) {
+        const path = this.root + this.jobsPath + '/' + jobId
+        return this.get(component, path, {}, onSuccess, null)
+    },
+
     postJob: function(component, job, onSuccess) {
         const path = this.root + this.jobsPath
         return this.post(component, path, job, onSuccess, null)
+    },
+
+    cancelJob: function(component, job, onSuccess) {
+        const path = this.root + this.jobsPath + '/' + job.id
+        return this.delete(component, path, onSuccess, null)
     },
 
     // if callback is non-null just return it, else build a funcion that will call the

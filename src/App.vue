@@ -7,6 +7,7 @@
                 <router-link to="/jobs">Jobs</router-link>
                 <router-link to="/resources">Resources</router-link>
                 <router-link to="/manage">Manage</router-link>
+                <router-link to="/users">Users</router-link>
                 |&nbsp;&nbsp;&nbsp;
                 <span v-if="user">
                     <router-link :to="userRoute(user)">{{user.name}}</router-link>
@@ -116,8 +117,6 @@ export default {
     width: 80%;
     margin: 1.5em 0 1.5em;
 }
-
-
 
 #user-messages > .ok {
     border-color: #2d2;

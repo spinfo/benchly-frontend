@@ -22,7 +22,9 @@
             <tbody>
                 <tr v-for="workflow in workflows">
                     <td>
-                        {{ workflow.id }}
+                        <router-link :to="{ name: 'workflow-edit', params: { versionId: workflow.versionId }}">
+                            {{ workflow.id }}
+                        </router-link>
                     </td>
                     <td>
                         <router-link :to="{ name: 'workflow-edit', params: { versionId: workflow.versionId }}">

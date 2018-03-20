@@ -8,6 +8,7 @@ import Workflow      from './Workflow.vue'
 import WorkflowIndex from './WorkflowIndex.vue'
 import Login         from './Login.vue'
 import JobNew        from './JobNew.vue'
+import Job           from './Job.vue'
 
 import BlyUtil       from './util.js'
 
@@ -64,6 +65,12 @@ const routes = [
     {
         path: '/jobs',
         component: Jobs
+    },
+    {
+        name: 'job',
+        path: '/jobs/:id',
+        component: Job,
+        props: true
     },
     {
         name: 'job-new',

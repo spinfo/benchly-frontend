@@ -46,7 +46,12 @@ export default {
     methods: {
         createJob: function() {
             Api.postJob(this, this.job, function(data) {
-                console.log(data.content)
+                const id = data.body.content.id
+                if (id) {
+                    this.$router.push({ name: 'job', params: { id: id } })
+                } else {
+                    console.error("Unexpected response on job submittal.")
+                }
             })
         }
     }

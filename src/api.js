@@ -83,6 +83,12 @@ export default {
         return this.delete(component, path, onSuccess, null)
     },
 
+    getJobs: function(component, limit, offset, onSuccess) {
+        const path = this.root + this.jobsPath
+        const params = { limit: limit, offset: offset }
+        return this.get(component, path, params, onSuccess, null)
+    },
+
     // if callback is non-null just return it, else build a funcion that will call the
     // default error callback using the provided component
     buildErrorCallback: function(component, callback) {

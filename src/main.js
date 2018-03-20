@@ -9,6 +9,7 @@ import WorkflowIndex from './WorkflowIndex.vue'
 import Login         from './Login.vue'
 import JobNew        from './JobNew.vue'
 import Job           from './Job.vue'
+import JobIndex      from './JobIndex.vue'
 
 import BlyUtil       from './util.js'
 
@@ -27,8 +28,6 @@ Vue.component('module', Module)
 Vue.component('module-properties-editor', ModulePropertiesEditor)
 Vue.component('workflow-editor', WorkflowEditor)
 Vue.component('pagination', Pagination)
-
-const Jobs = { template: '<div><h2>Jobs</h2></div>' }
 
 const routes = [
     {
@@ -64,7 +63,11 @@ const routes = [
     },
     {
         path: '/jobs',
-        component: Jobs
+        component: JobIndex,
+        props: (route) => ({
+            offset: BlyUtil.parsePositiveInt(route.query.offset, 0),
+            limit: BlyUtil.parsePositiveInt(route.query.limit, 10)
+        })
     },
     {
         name: 'job',

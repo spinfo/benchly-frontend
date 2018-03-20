@@ -1,6 +1,6 @@
 <template>
 <div v-if="ready">
-    <h1>Job #{{ job.id }}</h1>
+    <h2>Job #{{ job.id }}</h2>
 
     <table class="table">
         <tbody>
@@ -47,7 +47,7 @@
     </div>
 
     <div v-if="job.messages">
-        <h2>Messages</h2>
+        <h3>Messages</h3>
 
         <table class="table">
             <tbody>
@@ -78,7 +78,6 @@ export default {
         const self = this;
         Api.getJobById(this, this.id, function(data) {
             self.job = data.body.content
-            console.log(self.job)
             self.ready = true
         })
     },

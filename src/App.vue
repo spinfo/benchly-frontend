@@ -3,14 +3,17 @@
         <nav class="nav" tabindex="-1" onclick="this.focus()">
             <div class="container">
                 <router-link to="/" class="pagename current">Benchly</router-link>
-                <router-link to="/workflows">Workflows</router-link>
-                <router-link to="/jobs">Jobs</router-link>
+                <router-link :to="{ name: 'workflow-index' }">Workflows</router-link>
+                <router-link :to="{ name: 'job-index' }">Jobs</router-link>
                 <router-link to="/resources">Resources</router-link>
                 <router-link to="/manage">Manage</router-link>
-                <router-link to="/users">Users</router-link>
+                <router-link :to="{ name: 'user-index' }">Users</router-link>
                 |&nbsp;&nbsp;&nbsp;
                 <span v-if="user">
-                    <router-link :to="userRoute(user)">{{user.name}}</router-link>
+                    <router-link :to="{ name: 'user', params: { id: user.id }}">
+                        {{user.name}}
+                        <span v-if="user.isAdmin">(Admin)</span>
+                    </router-link>
                     <a href="#" v-on:click="doLogout">Logout</a>
                 </span>
                 <router-link v-else to="/login">Login</router-link>
@@ -60,10 +63,6 @@ export default {
     methods: {
         setUser: function(user) {
             this.user = user
-        },
-        // TODO: Yeah, this should be done better somehow...
-        userRoute: function(user) {
-            return "/users/" + user.id
         },
         getSessionCookie: function() {
             return BlyUtil.getCookie('JSESSIONID')

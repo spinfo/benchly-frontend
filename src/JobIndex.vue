@@ -72,7 +72,6 @@ export default {
             Api.getJobs(this, this.limit, this.offset, function(data) {
                 self.jobs = data.body.content
                 self.max = data.body.pagination.max
-                console.log(self.max)
                 self.loaded = true
             })
         }

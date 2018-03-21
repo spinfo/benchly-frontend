@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="max > limit">
     <span v-for="(link, i) in links">
         <span v-if="(i + 1) == currentPage">
             {{ i + 1 }}

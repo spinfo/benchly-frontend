@@ -11,6 +11,7 @@ export default {
     workflowsPath: "/workflows",
     sessionPath:   "/session",
     jobsPath:      "/jobs",
+    usersPath:     "/users",
 
     get: function(component, path, params, onSuccess, onFailure) {
         const errCb = this.buildErrorCallback(component, onFailure)
@@ -87,6 +88,32 @@ export default {
         const path = this.root + this.jobsPath
         const params = { limit: limit, offset: offset }
         return this.get(component, path, params, onSuccess, null)
+    },
+
+    getUserById: function(component, userId, onSuccess) {
+        const path = this.root + this.usersPath + '/' + userId
+        return this.get(component, path, {}, onSuccess, null)
+    },
+
+    getUsers: function(component, limit, offset, onSuccess) {
+        const path = this.root + this.usersPath
+        const params = { limit: limit, offset: offset }
+        return this.get(component, path, params, onSuccess, null)
+    },
+
+    postUser: function(component, user, onSuccess) {
+        const path = this.root + this.usersPath
+        return this.post(component, path, user, onSuccess, null)
+    },
+
+    putUser: function(component, user, onSuccess) {
+        const path = this.root + this.usersPath + "/" + user.id
+        return this.put(component, path, user, onSuccess, null)
+    },
+
+    deleteUser: function(component, user, onSuccess) {
+        const path = this.root + this.usersPath + "/" + user.id
+        return this.delete(component, path, onSuccess, null)
     },
 
     // if callback is non-null just return it, else build a funcion that will call the

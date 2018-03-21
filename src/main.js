@@ -10,6 +10,9 @@ import Login         from './Login.vue'
 import JobNew        from './JobNew.vue'
 import Job           from './Job.vue'
 import JobIndex      from './JobIndex.vue'
+import UserIndex     from './UserIndex.vue'
+import UserNew       from './UserNew.vue'
+import User          from './User.vue'
 
 import BlyUtil       from './util.js'
 
@@ -39,6 +42,7 @@ const routes = [
         component: Login
     },
     {
+        name: 'workflow-index',
         path: '/workflows',
         component: WorkflowIndex,
         props: (route) => ({
@@ -62,6 +66,7 @@ const routes = [
         props: true
     },
     {
+        name: 'job-index',
         path: '/jobs',
         component: JobIndex,
         props: (route) => ({
@@ -80,7 +85,28 @@ const routes = [
         path: '/workflows/:versionId/submit',
         component: JobNew,
         props: true
-    }
+    },
+    {
+        name: 'user',
+        path: '/users/:id',
+        component: User,
+        props: true
+    },
+    {
+        name: 'user-new',
+        path: '/users/new',
+        component: UserNew,
+        props: true
+    },
+    {
+        name: 'user-index',
+        path: '/users',
+        component: UserIndex,
+        props: (route) => ({
+            offset: BlyUtil.parsePositiveInt(route.query.offset, 0),
+            limit: BlyUtil.parsePositiveInt(route.query.limit, 10)
+        })
+    },
 ]
 
 const router = new VueRouter({

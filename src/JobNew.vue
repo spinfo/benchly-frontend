@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h1>New Job</h1>
+    <h2>New Job</h2>
 
     <form v-on:submit.prevent="createJob">
         <label>For Workflow: {{ job.workflow.name }}</label>

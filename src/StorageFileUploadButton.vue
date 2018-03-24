@@ -51,18 +51,15 @@ export default {
             const self = this
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        console.log("OK!")
-                    } else {
-                        self.$emit('newmessages', "File upload failed: " + xhr.status)
+                    if (xhr.status !== 200) {
+                        self.$emit('newmessages', [UserMessage.error("File upload failed: " + xhr.status)])
                     }
                     self.uploading = false
                 }
             }
 
-            const path = this.uploadPath + "?fileName=" + encodeURIComponent(file.name)
             formData.append('upload', file, file.name)
-            xhr.open('POST', path, true)
+            xhr.open('POST', this.uploadPath, true)
             xhr.send(formData)
             this.uploading = true
         },

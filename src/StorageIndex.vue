@@ -2,6 +2,10 @@
 <div>
     <h2>Storage</h2>
 
+    <div>
+        <router-link :to="{ name: 'storage-new'}">Add Storage Location</router-link>
+    </div>
+
     <div v-if="ready">
 
         <div v-for="config in configs" style="margin-bottom: 50px">
@@ -11,7 +15,9 @@
             <div class="row">
 
                 <div class="col c8">
-                    <h4>{{ config.provider}} | {{config.container}}</h4>
+                    <router-link :to="{ name: 'storage-edit', params: { id: config.id }}">
+                        <h4>{{ config.provider}} | {{config.container}}</h4>
+                    </router-link>
                     <div>Last refresh: {{ config.refreshedAt }}</div>
                 </div>
                 <div class="col c4">
@@ -56,10 +62,6 @@
                 </tbody>
             </table>
         </div>
-
-        <pre>
-            <!-- {{ configs }} -->
-        </pre>
 
     </div>
 
@@ -126,7 +128,6 @@ export default {
             this.$set(config, 'isLoading')
         },
         deleteFile: function(config, file) {
-            console.log(file)
             const confirmed = confirm("Do you really wish to delete the file: " + file.name)
             if (confirmed) {
                 const self = this;
@@ -137,7 +138,4 @@ export default {
         }
     }
 }
-</script>
-
-
 </script>

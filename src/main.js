@@ -14,6 +14,8 @@ import UserIndex     from './UserIndex.vue'
 import UserNew       from './UserNew.vue'
 import User          from './User.vue'
 import StorageIndex  from './StorageIndex.vue'
+import StorageNew    from './StorageNew.vue'
+import StorageEdit   from './StorageEdit.vue'
 
 import BlyUtil       from './util.js'
 
@@ -114,6 +116,17 @@ const routes = [
         name: 'storage-index',
         path: '/storage',
         component: StorageIndex
+    },
+    {
+        name: 'storage-new',
+        path: '/storage/new',
+        component: StorageNew
+    },
+    {
+        name: 'storage-edit',
+        path: '/storage/:id',
+        component: StorageEdit,
+        props: true
     },
 ]
 

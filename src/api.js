@@ -133,6 +133,21 @@ export default {
         return this.get(component, path, {}, onSuccess, null)
     },
 
+    fetchStorageConfig: function(component, id, onSuccess) {
+        const path = this.root + this.storagePath + '/' + id
+        return this.get(component, path, {}, onSuccess, null)
+    },
+
+    putStorageConfig: function(component, config, onSuccess) {
+        const path = this.root + this.storagePath + '/' + config.id
+        return this.put(component, path, config, onSuccess, null)
+    },
+
+    postStorageConfig: function(component, config, onSuccess) {
+        const path = this.root + this.storagePath
+        return this.post(component, path, config, onSuccess, null)
+    },
+
     refreshStorageConfig: function(component, config, onSuccess) {
         const path = this.root + this.storagePath + '/' + config.id
         const params = { refresh: true }
@@ -141,6 +156,11 @@ export default {
 
     deleteStorageFile: function(component, config, file, onSuccess) {
         const path = this.root + this.storagePath + '/' + config.id + '/files/' + file.id
+        return this.delete(component, path, onSuccess, null)
+    },
+
+    deleteStorageConfig: function(component, config, onSuccess) {
+        const path = this.root + this.storagePath + '/' + config.id
         return this.delete(component, path, onSuccess, null)
     },
 

@@ -6,7 +6,7 @@
                 <router-link :to="{ name: 'workflow-index' }">Workflows</router-link>
                 <router-link :to="{ name: 'job-index' }">Jobs</router-link>
                 <router-link :to="{ name: 'storage-index'}">Storage</router-link>
-                <router-link to="/manage">Manage</router-link>
+                <router-link :to="{ name: 'server-index'}">Servers</router-link>
                 <router-link :to="{ name: 'user-index' }">Users</router-link>
                 |&nbsp;&nbsp;&nbsp;
                 <span v-if="user">

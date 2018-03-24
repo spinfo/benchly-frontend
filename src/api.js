@@ -13,6 +13,7 @@ export default {
     jobsPath:      "/jobs",
     usersPath:     "/users",
     storagePath:   "/storage",
+    serversPath:   "/server_contacts",
 
     get: function(component, path, params, onSuccess, onFailure) {
         const errCb = this.buildErrorCallback(component, onFailure)
@@ -162,6 +163,29 @@ export default {
     deleteStorageConfig: function(component, config, onSuccess) {
         const path = this.root + this.storagePath + '/' + config.id
         return this.delete(component, path, onSuccess, null)
+    },
+
+    // WORKBENCH SERVERS
+
+    getServers: function(component, limit, offset, onSuccess) {
+        const path = this.root + this.serversPath
+        const params = { limit: limit, offset: offset }
+        return this.get(component, path, params, onSuccess, null)
+    },
+
+    getServerContact: function(component, id, onSuccess) {
+        const path = this.root + this.serversPath + '/' + id
+        return this.get(component, path, {}, onSuccess, null)
+    },
+
+    putServerContact: function(component, contact, onSuccess, onFailure) {
+        const path = this.root + this.serversPath + '/' + contact.id
+        return this.put(component, path, contact, onSuccess, onFailure)
+    },
+
+    postServerContact: function(component, contact, onSuccess, onFailure) {
+        const path = this.root + this.serversPath
+        return this.post(component, path, contact, onSuccess, onFailure)
     },
 
     // if callback is non-null just return it, else build a funcion that will call the

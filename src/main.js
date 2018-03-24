@@ -16,6 +16,9 @@ import User          from './User.vue'
 import StorageIndex  from './StorageIndex.vue'
 import StorageNew    from './StorageNew.vue'
 import StorageEdit   from './StorageEdit.vue'
+import ServerIndex   from './ServerIndex.vue'
+import ServerEdit    from './ServerEdit.vue'
+import ServerNew     from './ServerNew.vue'
 
 import BlyUtil       from './util.js'
 
@@ -127,6 +130,26 @@ const routes = [
         path: '/storage/:id',
         component: StorageEdit,
         props: true
+    },
+    {
+        name: 'server-index',
+        path: '/server_contacts',
+        component: ServerIndex,
+        props: (route) => ({
+            offset: BlyUtil.parsePositiveInt(route.query.offset, 0),
+            limit: BlyUtil.parsePositiveInt(route.query.limit, 10)
+        })
+    },
+    {
+        name: 'server-edit',
+        path: '/server_contacts/:id',
+        component: ServerEdit,
+        props: true
+    },
+    {
+        name: 'server-new',
+        path: '/server/new',
+        component: ServerNew
     },
 ]
 

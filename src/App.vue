@@ -5,7 +5,7 @@
                 <router-link to="/" class="pagename current">Benchly</router-link>
                 <router-link :to="{ name: 'workflow-index' }">Workflows</router-link>
                 <router-link :to="{ name: 'job-index' }">Jobs</router-link>
-                <router-link to="/resources">Resources</router-link>
+                <router-link :to="{ name: 'storage-index'}">Storage</router-link>
                 <router-link to="/manage">Manage</router-link>
                 <router-link :to="{ name: 'user-index' }">Users</router-link>
                 |&nbsp;&nbsp;&nbsp;

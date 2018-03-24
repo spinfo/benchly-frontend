@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h1>Login</h1>
+    <h2>Login</h2>
 
     <form v-on:submit.prevent="tryLogin">
 
@@ -34,8 +34,9 @@ export default {
             const self = this
             Api.postSession(this, this.userInput, function(data) {
                 self.$emit('userlogin', data.body.user)
-                // TODO: Only do this if we actually were on the site before...
-                self.$router.go(-1)
+
+                // TODO: Redirect to previous site (if our page)
+                // self.$router.go(-1)
             })
         }
     }

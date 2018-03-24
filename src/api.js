@@ -12,6 +12,7 @@ export default {
     sessionPath:   "/session",
     jobsPath:      "/jobs",
     usersPath:     "/users",
+    storagePath:   "/storage",
 
     get: function(component, path, params, onSuccess, onFailure) {
         const errCb = this.buildErrorCallback(component, onFailure)
@@ -32,6 +33,8 @@ export default {
         const errCb = this.buildErrorCallback(component, onFailure)
         return component.$http.delete(path).then(onSuccess, errCb)
     },
+
+    // WORKFLOW
 
     getWorkflows: function(component, limit, offset, onSuccess) {
         const path = this.root + this.workflowsPath
@@ -54,6 +57,8 @@ export default {
         return this.post(component, path, workflow, onSuccess, null)
     },
 
+    // SESSION
+
     getSession: function(component, onSuccess) {
         const path = this.root + this.sessionPath
         return this.get(component, path, {}, onSuccess, this.emptyCallback)
@@ -68,6 +73,8 @@ export default {
         const path = this.root + this.sessionPath
         return this.delete(component, path, onSuccess, onFailure)
     },
+
+    // JOB
 
     getJobById: function(component, jobId, onSuccess) {
         const path = this.root + this.jobsPath + '/' + jobId
@@ -89,6 +96,8 @@ export default {
         const params = { limit: limit, offset: offset }
         return this.get(component, path, params, onSuccess, null)
     },
+
+    // USER
 
     getUserById: function(component, userId, onSuccess) {
         const path = this.root + this.usersPath + '/' + userId
@@ -113,6 +122,25 @@ export default {
 
     deleteUser: function(component, user, onSuccess) {
         const path = this.root + this.usersPath + "/" + user.id
+        return this.delete(component, path, onSuccess, null)
+    },
+
+
+    // STORAGE
+
+    getStorageIndex: function(component, onSuccess) {
+        const path = this.root + this.storagePath
+        return this.get(component, path, {}, onSuccess, null)
+    },
+
+    refreshStorageConfig: function(component, config, onSuccess) {
+        const path = this.root + this.storagePath + '/' + config.id
+        const params = { refresh: true }
+        return this.get(component, path, params, onSuccess, null)
+    },
+
+    deleteStorageFile: function(component, config, file, onSuccess) {
+        const path = this.root + this.storagePath + '/' + config.id + '/files/' + file.id
         return this.delete(component, path, onSuccess, null)
     },
 

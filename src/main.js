@@ -13,6 +13,7 @@ import JobIndex      from './JobIndex.vue'
 import UserIndex     from './UserIndex.vue'
 import UserNew       from './UserNew.vue'
 import User          from './User.vue'
+import StorageIndex  from './StorageIndex.vue'
 
 import BlyUtil       from './util.js'
 
@@ -21,16 +22,19 @@ Vue.use(VModal)
 Vue.use(VResource)
 
 // setup components
-import ModuleCategory         from './workflow-editor/ModuleCategory.vue'
-import Module                 from './workflow-editor/Module.vue'
-import ModulePropertiesEditor from './workflow-editor/ModulePropertiesEditor.vue'
-import WorkflowEditor         from './workflow-editor/WorkflowEditor.vue'
-import Pagination             from './Pagination.vue'
+import ModuleCategory          from './workflow-editor/ModuleCategory.vue'
+import Module                  from './workflow-editor/Module.vue'
+import ModulePropertiesEditor  from './workflow-editor/ModulePropertiesEditor.vue'
+import WorkflowEditor          from './workflow-editor/WorkflowEditor.vue'
+import Pagination              from './Pagination.vue'
+import StorageFileUploadButton from './StorageFileUploadButton.vue'
+
 Vue.component('module-category', ModuleCategory)
 Vue.component('module', Module)
 Vue.component('module-properties-editor', ModulePropertiesEditor)
 Vue.component('workflow-editor', WorkflowEditor)
 Vue.component('pagination', Pagination)
+Vue.component('storage-file-upload-button', StorageFileUploadButton)
 
 const routes = [
     {
@@ -95,8 +99,7 @@ const routes = [
     {
         name: 'user-new',
         path: '/users/new',
-        component: UserNew,
-        props: true
+        component: UserNew
     },
     {
         name: 'user-index',
@@ -106,6 +109,11 @@ const routes = [
             offset: BlyUtil.parsePositiveInt(route.query.offset, 0),
             limit: BlyUtil.parsePositiveInt(route.query.limit, 10)
         })
+    },
+    {
+        name: 'storage-index',
+        path: '/storage',
+        component: StorageIndex
     },
 ]
 

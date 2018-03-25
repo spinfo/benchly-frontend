@@ -12,6 +12,7 @@
                     <th>#</th>
                     <th>State</th>
                     <th>Submitted</th>
+                    <th>By</th>
                     <th>Workflow</th>
                 </tr>
             </thead>
@@ -31,6 +32,15 @@
                         {{ job.createdAt }}
                     </td>
                     <td>
+                        <router-link v-if="currentUser.isAdmin" :to="{ name: 'user', params: { id: job.owner.id }}">
+                            {{ job.owner.name }}
+                        </router-link>
+                        <div v-else>
+                            {{ job.owner.name }}
+                        </div>
+                    </td>
+
+                    <td>
                         <router-link :to="{ name: 'workflow-edit', params: { versionId: job.workflow.versionId }}">
                             {{ job.workflow.versionId }}
                         </router-link>
@@ -38,6 +48,8 @@
                 </tr>
             </tbody>
         </table>
+
+        <pre>{{ jobs }}</pre>
 
     </div>
 </div>
@@ -58,7 +70,8 @@ export default {
         return {
             max: 10,
             jobs: [],
-            loaded: false
+            loaded: false,
+            currentUser: {}
         }
     },
     created: function() {
@@ -72,6 +85,8 @@ export default {
             this.loaded = false
             const self = this
             Api.getJobs(this, this.limit, this.offset, function(data) {
+                self.currentUser = data.body.user
+
                 self.jobs = data.body.content
                 self.max = data.body.pagination.max
                 self.loaded = true

@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <workflow-editor
+    <workflow-editor v-if="shouldDisplayEditor"
         :workflow-definition="workflow.definition"
         v-on:saveworkflow="saveWorkflow"
         ></workflow-editor>
@@ -26,7 +26,8 @@ export default {
     props: [ 'versionId', 'id'],
     data () {
         return {
-            workflow: { definition: [] }
+            workflow: { definition: [] },
+            shouldDisplayEditor: true
         }
     },
     created: function() {
@@ -58,10 +59,12 @@ export default {
             }
             // a new workflow is created
             else {
+                self.shouldDisplayEditor = false
                 Api.postWorkflow(this, workflow, function(data) {
                     const workflow = data.body.content
                     const redirect = { path: `/workflows/${workflow.versionId}` }
                     self.$router.push(redirect, function() {
+                        self.shouldDisplayEditor = true
                         self.$emit("newmessages", [ UserMessage.ok("Created") ])
                     })
                 })

@@ -31,6 +31,9 @@ import ModuleCategory          from './workflow-editor/ModuleCategory.vue'
 import Module                  from './workflow-editor/Module.vue'
 import ModulePropertiesEditor  from './workflow-editor/ModulePropertiesEditor.vue'
 import WorkflowEditor          from './workflow-editor/WorkflowEditor.vue'
+import InputFileDialog         from './workflow-editor/InputFileDialog.vue'
+import OutputFileDialog        from './workflow-editor/OutputFileDialog.vue'
+
 import Pagination              from './Pagination.vue'
 import StorageFileUploadButton from './StorageFileUploadButton.vue'
 
@@ -38,6 +41,8 @@ Vue.component('module-category', ModuleCategory)
 Vue.component('module', Module)
 Vue.component('module-properties-editor', ModulePropertiesEditor)
 Vue.component('workflow-editor', WorkflowEditor)
+Vue.component('input-file-dialog', InputFileDialog)
+Vue.component('output-file-dialog', OutputFileDialog)
 Vue.component('pagination', Pagination)
 Vue.component('storage-file-upload-button', StorageFileUploadButton)
 

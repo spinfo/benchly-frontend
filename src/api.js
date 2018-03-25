@@ -139,6 +139,12 @@ export default {
         return this.get(component, path, {}, onSuccess, null)
     },
 
+    fetchStorageConfigWithCredential: function(component, id, onSuccess) {
+        const path = this.root + this.storagePath + '/' + id
+        const params = { credential: "true" }
+        return this.get(component, path, params, onSuccess, null)
+    },
+
     putStorageConfig: function(component, config, onSuccess) {
         const path = this.root + this.storagePath + '/' + config.id
         return this.put(component, path, config, onSuccess, null)

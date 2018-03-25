@@ -14,13 +14,15 @@
                 <button class="tab" v-on:click="activateTab('definition')">JSON</button>
 
                 <div style="float: right;">
+                    <button class="tab-bar-action-item" v-on:click="$modal.show('inputFileDialog')">Storage Input</button> |
+                    <button class="tab-bar-action-item" v-on:click="$modal.show('outputFileDialog')">Storage Output</button> |
                     <button class="tab-bar-action-item" v-on:click="requestSave">Save</button> |
                     <button class="tab-bar-action-item" v-on:click="clearWorkflow">Clear</button> |
                     <button class="tab-bar-action-item" v-on:click="copyWorkflow">Copy</button> |
-                    <!-- TODO: This could be in a component -->
+                    <!-- TODO: Re-enable reading definition when the backend handles module profiles
                     <button class="tab-bar-action-item" v-on:click="triggerFileInput">
                         Von Datei <input id="hidden-file-input" style="display: none;" type="file">
-                    </button> |
+                    </button> | -->
                     <button class="tab-bar-action-item" v-on:click="downloadWorkflow">Download</button>
                 </div>
             </div>
@@ -38,6 +40,23 @@
                 <pre id="workflow-definition-json">{{ pureModuleDefinitionsAsJSON }}</pre>
             </div>
         </div>
+
+        <modal name="inputFileDialog"
+            height="auto"
+            width="50%"
+            :resizable="true"
+            :pivot-y="0.1"
+            :scrollable="true">
+            <input-file-dialog v-on:inputfilechosen="addInputModule"></input-file-dialog>
+        </modal>
+        <modal name="outputFileDialog"
+            height="auto"
+            width="50%"
+            :resizable="true"
+            :pivot-y="0.1"
+            :scrollable="true">
+            <output-file-dialog v-on:outputfilechosen="addOutputModule"></output-file-dialog>
+        </modal>
     </div>
 </template>
 
@@ -51,6 +70,7 @@ import jsPlumpWorkflowInstanceInit from './jsplumbWorkflowInstance.js'
 
 // TODO: This should be renamed to WorkflowDefinition
 import Workflow from './models/Workflow.js'
+import Module from './models/Module.js'
 import ModuleCategory from './ModuleCategory.vue'
 import BlyUtil from '../util.js'
 
@@ -58,6 +78,8 @@ export default {
     props: ['workflow-definition'],
     data: function() {
         return {
+            inputModuleClass: "modules.input_output.cloud_storage.CloudReaderModule",
+            outputModuleClass: "modules.input_output.cloud_storage.CloudWriterModule",
             workflow: null,
             moduleProfilesByCategory: {},
             moduleProfilesByClass: {},
@@ -129,6 +151,35 @@ export default {
         // offer the user to download the module definitions as a file
         downloadWorkflow: function() {
             BlyUtil.saveToFile(this.pureModuleDefinitionsAsJSON, "workflow.exp", "text/json")
+        },
+
+        addInputModule: function(config, file) {
+            const profile = this.moduleProfilesByClass[this.inputModuleClass]
+            const module = Module.fromProfile(profile)
+
+            this.setIOModuleProperties(module, config, file)
+            this.addModuleToCanvas(module)
+            this.$modal.hide("inputFileDialog")
+        },
+
+        addOutputModule: function(config, fileName) {
+            const profile = this.moduleProfilesByClass[this.outputModuleClass]
+            const module = Module.fromProfile(profile)
+
+            this.setIOModuleProperties(module, config, { name: fileName })
+            this.addModuleToCanvas(module)
+            this.$modal.hide("outputFileDialog")
+        },
+
+        setIOModuleProperties: function(module, config, file) {
+            const props = module._definition.properties
+            props["Context identifier"] = config.provider
+            props["Endpoint"] = config.endpoint
+            props["Identity"] = config.identity
+            props["Credential"] = config.encryptedCredential.encryptedCredential
+            props["Salt"] = config.encryptedCredential.salt
+            props["Container"] = config.container
+            props["File"] = file.name
         },
 
         triggerFileInput: function() {

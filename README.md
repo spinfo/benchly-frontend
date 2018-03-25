@@ -1,18 +1,19 @@
 # benchly-frontend
 
-> A Vue.js project
+A frontend for the [Benchly Workbench Coordinator](https://github.com/spinfo/benchly)
 
-## Build Setup
+## Build
+
+For a development build run:
 
 ``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
 npm run dev
+```
 
-# build for production with minification
+For a development build run
+
+``` bash
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Both builds expect an instance of the [main application](https://github.com/spinfo/benchly) available at `localhost/api`

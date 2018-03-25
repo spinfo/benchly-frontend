@@ -8,6 +8,9 @@ function Port() {
     // the backend's canonical class for the pipe to connect to this port, e.g. "modules.CharPipe"
     this.pipeClass = this.pipeClass || null
 
+    // which pipes are supported, e.g. [ "modules.CharPipe" ]
+    this.supportedPipes
+
     // an id given by the backend or set by us
     this.instanceHashCode = this.instanceHashCode || 0
 
@@ -57,7 +60,22 @@ function Port() {
         // the backend expects these to be strings, so let's please it
         var key = String(otherPort.getId())
         this.connectedPipesDestinationHashCodes[key] = otherPort.pipeClass
-        // TODO: Set the pipe class that works for both ports
+
+        // Set the pipe class that works for both ports
+        var found = false;
+        for(var i = 0; i < this.supportedPipes.length; i++) {
+            const aClass = this.supportedPipes[i]
+            if (otherPort.supportedPipes.indexOf(aClass) != -1) {
+                this.pipeClass = aClass
+                otherPort.pipeClass = aClass
+                found = true
+                break
+            }
+        }
+        if (!found) {
+            console.error("No suitable pipe class found to make a connection.")
+        }
+
     }
 
     this.getDescription = function() {
@@ -68,12 +86,11 @@ function Port() {
 Port.fromProfile = function(profile) {
     var port = new Port()
 
-    // the pipe class is left undecided until a connection is made
-    port.pipeClass = null
+    // the pipe class is letter adjusted when a connection is made
+    port.pipeClass = profile.supportedPipes[0]
     port.instanceHashCode = BlyUtil.generateId()
     port.name = profile.name
-
-    // TODO: Note the pipe classes allowed here
+    port.supportedPipes = profile.supportedPipes
 
     return port
 }

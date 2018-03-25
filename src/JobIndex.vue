@@ -11,8 +11,8 @@
                 <tr>
                     <th>#</th>
                     <th>State</th>
-                    <th>Workflow</th>
                     <th>Submitted</th>
+                    <th>Workflow</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,15 +23,17 @@
                         </router-link>
                     </td>
                     <td>
-                        {{ job.state }}
+                        <router-link :to="{ name: 'job', params: { id: job.id }}">
+                            {{ job.state }}
+                        </router-link>
+                    </td>
+                    <td>
+                        {{ job.createdAt }}
                     </td>
                     <td>
                         <router-link :to="{ name: 'workflow-edit', params: { versionId: job.workflow.versionId }}">
                             {{ job.workflow.versionId }}
                         </router-link>
-                    </td>
-                    <td>
-                        {{ job.createdAt }}
                     </td>
                 </tr>
             </tbody>

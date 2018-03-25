@@ -3,7 +3,7 @@ export default {
 
     // generates a random id to use on html elements
     generateId: function() {
-        return parseInt(Math.random() * Number.MAX_SAFE_INTEGER)
+        return parseInt(Math.random() * Math.pow(2, 28))
     },
 
     arraysEqual: function(a, b) {

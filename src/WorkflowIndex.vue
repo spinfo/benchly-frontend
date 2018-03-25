@@ -17,6 +17,7 @@
                     <th>Name</th>
                     <th>Author</th>
                     <th><!-- Run --></th>
+                    <th><!-- Delete --></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +29,12 @@
                     </td>
                     <td>
                         <router-link :to="{ name: 'workflow-edit', params: { versionId: workflow.versionId }}">
-                            {{ workflow.name }}
+                            <span v-if="workflow.name">
+                                {{ workflow.name }}
+                            </span>
+                            <span v-else>
+                                (unnamed)
+                            </span>
                         </router-link>
                     </td>
                     <td>
@@ -38,6 +44,9 @@
                         <router-link :to="{ name: 'job-new', params: { versionId: workflow.versionId }}">
                             Run
                         </router-link>
+                    </td>
+                    <td>
+                        <b v-on:click="deleteWorkflow(workflow)" style="cursor: pointer">❌</b>
                     </td>
                 </tr>
             </tbody>
@@ -81,9 +90,14 @@ export default {
                 self.max = data.body.pagination.max
             })
         },
-        routeTo(workflow) {
-            // TODO: Needs a better place...
-            return 'workflows/' + workflow.versionId
+        deleteWorkflow: function(workflow) {
+            const confirmed = confirm("Do you really wish to delete the workflow: '" + workflow.name + "'")
+            if (confirmed) {
+                const self = this;
+                Api.deleteWorkflow(this, workflow, function(data) {
+                    self.fetchWorkflows()
+                })
+            }
         }
     },
 }

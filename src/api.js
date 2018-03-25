@@ -58,6 +58,11 @@ export default {
         return this.post(component, path, workflow, onSuccess, null)
     },
 
+    deleteWorkflow: function(component, workflow, onSuccess) {
+        const path = this.root + this.workflowsPath + "/" + workflow.versionId
+        return this.delete(component, path, onSuccess, null)
+    },
+
     // SESSION
 
     getSession: function(component, onSuccess) {

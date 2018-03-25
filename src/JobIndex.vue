@@ -49,8 +49,6 @@
             </tbody>
         </table>
 
-        <pre>{{ jobs }}</pre>
-
     </div>
 </div>
 </template>

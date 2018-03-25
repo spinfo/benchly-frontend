@@ -8,6 +8,10 @@
         </div>
     </div>
 
+    <div class="row">
+        <input v-model="workflow.name" placeholder="Workflow Name">
+    </div>
+
     <workflow-editor v-if="shouldDisplayEditor"
         :workflow-definition="workflow.definition"
         v-on:saveworkflow="saveWorkflow"

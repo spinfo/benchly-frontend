@@ -289,8 +289,7 @@ export default {
 }
 
 #canvas {
-    /* TODO: Adjust for different screen sizes */
-    min-height: 600px;
+    height: 700px;
     border:1px solid #CCC;
     background-color:white;
     display: flex;

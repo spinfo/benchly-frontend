@@ -88,16 +88,18 @@ export default {
             return JSON.stringify(this.pureModuleDefinitions, null, 4)
         }
     },
-
-    created: function() {
-        // init a jsplumb instance, this component should be notified of
-        // connection changes
-        jsPlumpWorkflowInstanceInit(this)
-        // fetch some data to display
-        this.fetchModuleProfiles()
-        // initialise the workflow by adding all modules provided in the workflow
-        // definition
-        this.addModuleDefinitionsToWorkflow(this.workflowDefinition)
+    mounted: function () {
+        // for jsplumb to render correctly, we have to wait until the complete
+        // view has been rendered, cf. https://vuejs.org/v2/api/#mounted
+        this.$nextTick(function () {
+            // init a jsplumb instance, this component should be notified of
+            // connection changes
+            jsPlumpWorkflowInstanceInit(this)
+            // fetch some data to display
+            this.fetchModuleProfiles()
+            // initialise a workflow (even if none is present at this moment)
+            this.addModuleDefinitionsToWorkflow(this.workflowDefinition)
+        })
     },
 
     watch: {
@@ -289,7 +291,8 @@ export default {
 }
 
 #canvas {
-    height: 700px;
+    /* TODO: Adjust for different screen sizes */
+    min-height: 600px;
     border:1px solid #CCC;
     background-color:white;
     display: flex;

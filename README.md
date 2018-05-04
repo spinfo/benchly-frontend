@@ -14,7 +14,7 @@ Then for a development build run:
 npm run dev
 ```
 
-For a development build run
+For a production build run
 
 ``` bash
 npm run build

@@ -4,7 +4,11 @@ A frontend for the [Benchly Workbench Coordinator](https://github.com/spinfo/ben
 
 ## Build
 
-For a development build run:
+```bash
+npm install
+```
+
+Then for a development build run:
 
 ``` bash
 npm run dev
@@ -16,4 +20,4 @@ For a development build run
 npm run build
 ```
 
-Both builds expect an instance of the [main application](https://github.com/spinfo/benchly) available at `localhost/api`
+Both builds expect an instance of the [main application](https://github.com/spinfo/benchly) available at `[localhost]/api`

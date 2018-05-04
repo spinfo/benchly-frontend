@@ -19,6 +19,9 @@
         <label for="container">Container</label>
         <input class="smooth" id="container" required v-model="config.container">
 
+        <label for="endpoint">Endpoint</label>
+        <input class="smooth" id="endpoint" v-model="config.endpoint">
+
         <input class="btn btn-b btn-sm smooth" type="submit" value="Submit">
     </form>
 </div>

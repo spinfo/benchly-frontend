@@ -2,6 +2,8 @@
 
 A frontend for the [Benchly Workbench Coordinator](https://github.com/spinfo/benchly)
 
+[An example for a complete setup is available in it's wiki.](https://github.com/spinfo/benchly/wiki/Simple-Setup)
+
 ## Build
 
 ```bash
